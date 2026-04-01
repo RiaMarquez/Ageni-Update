@@ -3,9 +3,11 @@
 /* ------------------------------------------------------------------ */
 
 export const NAV_LINKS = [
-  { label: "Our Work", href: "#our-work" },
-  { label: "About", href: "#about" },
-  { label: "Blog", href: "#blog" },
+  { label: "Our Work", href: "#" },
+  { label: "Services", href: "#", hasDropdown: true },
+  { label: "Partnerships", href: "/partnerships" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
 ] as const;
 
 export const SERVICE_MENU = {
@@ -13,25 +15,17 @@ export const SERVICE_MENU = {
     {
       title: "AI Literacy Training",
       links: [
-        { label: "Prompt Mastery Assessment", href: "#pma" },
-        { label: "AI Foundations", href: "#ai-foundations" },
-        { label: "AI for Business Leaders", href: "#ai-business" },
+        { label: "Pricing", href: "/#pricing" },
+        { label: "How It Works", href: "/#how-it-works" },
+        { label: "Differentiators", href: "/#differentiators" },
       ],
     },
     {
-      title: "Custom Job Skills",
+      title: "Custom Job Skills Training",
       links: [
-        { label: "Role-Based Assessments", href: "#role-based" },
-        { label: "Team Upskilling", href: "#team-upskilling" },
-        { label: "Enterprise Packages", href: "#enterprise" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { label: "Blog", href: "#blog" },
-        { label: "Case Studies", href: "#case-studies" },
-        { label: "Help Center", href: "#help" },
+        { label: "Service Overview", href: "/#service-pillars" },
+        { label: "Industries", href: "/#industries" },
+        { label: "FAQ", href: "/#faq" },
       ],
     },
   ],

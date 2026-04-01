@@ -2,25 +2,46 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import Button from "@/components/ui/Button";
 
 export default function ContactCTA() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <SectionWrapper id="contact" className="bg-light py-20">
-      <div className="mx-auto max-w-7xl px-6">
+    <SectionWrapper id="contact" className="relative overflow-hidden rounded-t-[2.5rem] bg-dark py-24">
+      {/* Watermark */}
+      <div className="pointer-events-none absolute inset-0 flex items-end justify-center overflow-hidden">
+        <span className="translate-y-24 text-[12vw] font-bold leading-none tracking-tighter text-white/[0.03]">
+          contact us
+        </span>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-2">
-          {/* Left — Form */}
+          {/* Left — Headline + Book a call */}
           <div>
-            <h2 className="text-3xl font-bold text-dark sm:text-4xl">
-              Let&apos;s talk about <em className="text-primary">your</em>{" "}
-              training needs
+            <h2 className="text-4xl font-medium text-white sm:text-5xl lg:text-6xl">
+              Let&apos;s talk<br />
+              about <em className="italic">your</em><br />
+              <em className="italic">training needs</em>
             </h2>
 
+            <Link
+              href="#contact"
+              className="mt-10 inline-flex items-center gap-3 rounded-full bg-white pl-6 pr-2 py-2 text-sm font-medium text-dark transition-all hover:-translate-y-0.5"
+            >
+              Book a call
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-white">
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </Link>
+          </div>
+
+          {/* Right — Form */}
+          <div>
             {submitted ? (
-              <div className="mt-8 rounded-xl border border-primary/20 bg-primary/5 p-8 text-center">
+              <div className="rounded-2xl bg-white p-10 text-center">
                 <p className="text-lg font-semibold text-dark">
                   Thank you for your inquiry
                 </p>
@@ -34,98 +55,57 @@ export default function ContactCTA() {
                   e.preventDefault();
                   setSubmitted(true);
                 }}
-                className="mt-8 space-y-4"
+                className="space-y-4"
               >
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-1 block text-sm font-medium text-dark"
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    className="w-full rounded-lg border border-muted/20 bg-white px-4 py-3 text-sm text-dark outline-none transition-colors focus:border-primary"
-                  />
-                </div>
+                <input
+                  type="text"
+                  required
+                  placeholder="Name"
+                  className="w-full rounded-xl bg-white px-6 py-4 text-sm text-dark placeholder-muted outline-none"
+                />
 
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-1 block text-sm font-medium text-dark"
-                  >
-                    Email
-                  </label>
+                <div className="grid gap-4 sm:grid-cols-2">
                   <input
-                    id="email"
                     type="email"
                     required
-                    className="w-full rounded-lg border border-muted/20 bg-white px-4 py-3 text-sm text-dark outline-none transition-colors focus:border-primary"
+                    placeholder="Email"
+                    className="w-full rounded-xl bg-white px-6 py-4 text-sm text-dark placeholder-muted outline-none"
                   />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="company"
-                    className="mb-1 block text-sm font-medium text-dark"
-                  >
-                    Company{" "}
-                    <span className="text-xs text-muted">(optional)</span>
-                  </label>
                   <input
-                    id="company"
                     type="text"
-                    className="w-full rounded-lg border border-muted/20 bg-white px-4 py-3 text-sm text-dark outline-none transition-colors focus:border-primary"
+                    placeholder="Company (optional)"
+                    className="w-full rounded-xl bg-white px-6 py-4 text-sm text-dark placeholder-muted outline-none"
                   />
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-1 block text-sm font-medium text-dark"
-                  >
-                    Message
-                  </label>
+                <div className="relative">
                   <textarea
-                    id="message"
-                    rows={4}
+                    rows={5}
                     required
-                    className="w-full rounded-lg border border-muted/20 bg-white px-4 py-3 text-sm text-dark outline-none transition-colors focus:border-primary"
+                    placeholder="Brief description of the project"
+                    className="w-full rounded-xl bg-white px-6 py-4 text-sm text-dark placeholder-muted outline-none"
                   />
+                  {/* Send button inside textarea area */}
+                  <button
+                    type="submit"
+                    className="absolute right-4 bottom-4 inline-flex items-center gap-2 rounded-full bg-primary/10 pl-5 pr-2 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-white"
+                  >
+                    Send
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </button>
                 </div>
-
-                <Button>Send</Button>
               </form>
             )}
 
-            <p className="mt-4 text-xs text-muted">
+            <p className="mt-4 text-xs text-white/40">
               By submitting, you agree to our{" "}
-              <Link
-                href="/privacy-policy"
-                className="underline hover:text-primary"
-              >
+              <Link href="/privacy-policy" className="underline hover:text-white/60">
                 Privacy Policy
               </Link>
               .
             </p>
-          </div>
-
-          {/* Right — Book a call + review badges */}
-          <div className="flex flex-col items-start justify-center gap-8">
-            <Link
-              href="#contact"
-              className="inline-flex items-center rounded-full border border-primary px-7 py-3 text-sm font-medium text-primary transition-all hover:bg-primary hover:text-white"
-            >
-              Book a call &rarr;
-            </Link>
-
-            {/* Review badge placeholders */}
-            <div className="flex gap-4">
-              <div className="h-12 w-28 rounded-lg bg-muted/10" />
-              <div className="h-12 w-28 rounded-lg bg-muted/10" />
-            </div>
           </div>
         </div>
       </div>

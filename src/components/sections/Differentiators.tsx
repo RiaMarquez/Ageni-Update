@@ -1,7 +1,6 @@
 "use client";
 
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import Badge from "@/components/ui/Badge";
 import { DIFFERENTIATORS } from "@/lib/constants";
 import { ShieldCheck, Brain, BarChart3, Smartphone } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -12,24 +11,21 @@ export default function Differentiators() {
   return (
     <SectionWrapper id="differentiators" className="bg-light py-20">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Heading */}
-        <div className="mb-12 text-center">
-          <Badge>Why ageni.ai</Badge>
-          <h2 className="mt-4 text-3xl font-bold text-dark sm:text-4xl">
-            What makes us different
-          </h2>
-        </div>
+        <h2 className="mb-14 text-5xl font-medium italic text-dark sm:text-6xl lg:text-7xl">
+          What makes us different
+        </h2>
 
-        {/* Cards */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {DIFFERENTIATORS.map((item, index) => {
             const Icon = ICONS[index];
             return (
               <div
                 key={item.title}
-                className="rounded-xl border border-muted/10 bg-white p-6 transition-all hover:shadow-lg"
+                className="rounded-2xl bg-white p-6 transition-all hover:shadow-lg"
               >
-                <Icon className="mb-4 h-8 w-8 text-primary" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                  <Icon className="h-6 w-6 text-primary" />
+                </div>
                 <h3 className="text-base font-semibold text-dark">
                   {item.title}
                 </h3>

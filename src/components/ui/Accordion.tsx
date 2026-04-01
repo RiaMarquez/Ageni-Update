@@ -13,19 +13,19 @@ function AccordionItem({ question, answer }: AccordionItemData) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-muted/20">
+    <div className="rounded-2xl border border-muted/10 bg-white transition-shadow hover:shadow-sm">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between gap-4 py-5 text-left text-base font-medium text-dark transition-colors hover:text-primary"
+        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
       >
-        {question}
+        <span className="text-sm font-medium text-dark">{question}</span>
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          className="shrink-0"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-dark"
         >
-          <ChevronDown className="h-5 w-5 text-muted" />
+          <ChevronDown className="h-5 w-5 text-white" />
         </motion.span>
       </button>
 
@@ -39,7 +39,7 @@ function AccordionItem({ question, answer }: AccordionItemData) {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-sm leading-relaxed text-muted">{answer}</p>
+            <p className="px-6 pb-6 text-sm leading-relaxed text-muted">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -53,7 +53,7 @@ type AccordionProps = {
 
 export default function Accordion({ items }: AccordionProps) {
   return (
-    <div>
+    <div className="grid gap-4 md:grid-cols-2">
       {items.map((item) => (
         <AccordionItem
           key={item.question}

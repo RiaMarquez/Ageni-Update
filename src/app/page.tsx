@@ -6,6 +6,11 @@ import HowItWorks from "@/components/sections/HowItWorks";
 import Industries from "@/components/sections/Industries";
 import Numbers from "@/components/sections/Numbers";
 import Advisory from "@/components/sections/Advisory";
+import Differentiators from "@/components/sections/Differentiators";
+import Testimonials from "@/components/sections/Testimonials";
+import FAQ from "@/components/sections/FAQ";
+import Pricing from "@/components/sections/Pricing";
+import ContactCTA from "@/components/sections/ContactCTA";
 
 export default function Home() {
   return (
@@ -18,6 +23,11 @@ export default function Home() {
       <Industries />
       <Numbers />
       <Advisory />
+      <Differentiators />
+      <Testimonials />
+      <FAQ />
+      <Pricing />
+      <ContactCTA />
     </main>
   );
 }

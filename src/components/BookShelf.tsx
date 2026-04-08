@@ -154,7 +154,7 @@ function adjColor(hex: string, amount: number): string {
   )
 }
 
-const SPRING = { type: "spring", stiffness: 180, damping: 22, mass: 0.8 }
+const SPRING = { type: "spring" as const, stiffness: 180, damping: 22, mass: 0.8 }
 
 function BookItem({
   book,

@@ -36,11 +36,10 @@ export const SERVICE_MENU = {
 /* ------------------------------------------------------------------ */
 
 export const TRUST_LOGOS = [
-  { name: "Mapua", src: "/logos/mapua.svg" },
-  { name: "PUP", src: "/logos/pup.svg" },
-  { name: "FEU", src: "/logos/feu.svg" },
-  { name: "UE", src: "/logos/ue.svg" },
-  { name: "Iozera", src: "/logos/iozera.svg" },
+  { name: "Mapua", src: "/media/logos/mapua-logo.png" },
+  { name: "PUP", src: "/media/logos/PUPlogo.png" },
+  { name: "DLSU", src: "/media/logos/dlsu-logo.png" },
+  { name: "MFI", src: "/media/logos/mfi-logo.png" },
 ] as const;
 
 /* ------------------------------------------------------------------ */

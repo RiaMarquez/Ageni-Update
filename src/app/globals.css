@@ -1,24 +1,92 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #5563D8;
-  --color-primary-light: #8B96E9;
-  --color-dark: #0B0E2A;
-  --color-accent: #0F1235;
-  --color-light: #F4F5F7;
-  --color-muted: #7C8299;
-  --font-sans: "Outfit", sans-serif;
+  --color-primary: #C9A227;
+  --color-primary-light: #DBBF4A;
+  --color-dark: #0C0B09;
+  --color-accent: #161412;
+  --color-light: #F5F3EE;
+  --color-muted: #8A8472;
+  --font-sans: var(--font-body), sans-serif;
+  --font-title: var(--font-title), "Cormorant Garamond", serif;
+  --font-subtitle: var(--font-subtitle), "Hind Madurai", sans-serif;
 }
 
 :root {
-  --color-primary: #5563D8;
-  --color-primary-light: #8B96E9;
-  --color-dark: #0B0E2A;
-  --color-accent: #0F1235;
-  --color-light: #F4F5F7;
-  --color-muted: #7C8299;
+  --color-primary: #C9A227;
+  --color-primary-light: #DBBF4A;
+  --color-dark: #0C0B09;
+  --color-accent: #161412;
+  --color-light: #F5F3EE;
+  --color-muted: #8A8472;
 }
 
-html { scroll-behavior: smooth; }
-body { font-family: "Outfit", sans-serif; color: var(--color-dark); background: var(--color-light); overflow-x: hidden; }
-::selection { background: var(--color-primary); color: white; }
+html { scroll-behavior: smooth; cursor: none; }
+*, *::before, *::after { cursor: none !important; }
+body { font-family: var(--font-body), "Maven Pro", sans-serif; color: var(--color-dark); background: var(--color-light); overflow-x: hidden; }
+::selection { background: var(--color-primary); color: var(--color-dark); }
+
+/* Font utility classes */
+.font-title { font-family: var(--font-title), "Cormorant Garamond", serif; }
+.font-subtitle { font-family: var(--font-subtitle), "Hind Madurai", sans-serif; }
+
+/* Noise texture overlay for dark sections */
+.noise-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+/* Advisory heartbeat — subtle scale pulse like a heartbeat */
+@keyframes advisory-heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.05); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.03); }
+  60% { transform: scale(1); }
+}
+.animate-advisory-heartbeat {
+  animation: advisory-heartbeat 2s ease-in-out infinite;
+}
+
+/* Advisory ring pulse — expands outward from frame and fades */
+@keyframes advisory-ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Advisory orbiting dot — rotates around the container */
+@keyframes advisory-orbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-advisory-orbit {
+  animation: advisory-orbit 8s linear infinite;
+}
+
+/* Ageni shimmer text */
+@keyframes ageni-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: -100% 50%; }
+}
+.ageni-shimmer {
+  animation: ageni-shimmer 3s ease-in-out infinite;
+}

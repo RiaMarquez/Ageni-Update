@@ -14,7 +14,7 @@ const base =
   "inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium transition-all";
 
 const variants = {
-  primary: "bg-primary text-white px-7 py-3 hover:brightness-110 hover:-translate-y-0.5",
+  primary: "bg-primary text-dark px-7 py-3 font-semibold hover:brightness-110 hover:-translate-y-0.5",
   outline:
     "border border-muted/30 text-dark px-7 py-3 hover:border-primary hover:text-primary",
   dark: "bg-dark text-white px-7 py-3 hover:bg-dark/90 hover:-translate-y-0.5",

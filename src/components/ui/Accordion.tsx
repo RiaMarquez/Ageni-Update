@@ -13,7 +13,7 @@ function AccordionItem({ question, answer }: AccordionItemData) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="rounded-2xl border border-muted/10 bg-white transition-shadow hover:shadow-sm">
+    <div className="rounded-2xl border border-muted/10 bg-white transition-all hover:shadow-sm">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
@@ -23,9 +23,9 @@ function AccordionItem({ question, answer }: AccordionItemData) {
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-dark"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-dark text-white"
         >
-          <ChevronDown className="h-5 w-5 text-white" />
+          <ChevronDown className="h-5 w-5" />
         </motion.span>
       </button>
 

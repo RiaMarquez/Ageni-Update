@@ -45,34 +45,32 @@ export default function Testimonials() {
   const testimonial = TESTIMONIALS[current];
 
   return (
-    <SectionWrapper className="rounded-t-[2.5rem] bg-white py-20">
+    <SectionWrapper className="bg-light py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Header row: title left, controls right */}
         <div className="mb-14 flex items-end justify-between">
-          <h2 className="text-5xl font-medium italic text-dark sm:text-6xl lg:text-7xl">
-            Testimonials
+          <h2 className="font-title text-5xl font-semibold italic text-dark sm:text-6xl lg:text-7xl">
+            What they <span className="text-primary">say</span>
           </h2>
           <div className="flex gap-3">
             <button
               type="button"
               onClick={prev}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-muted/20 transition-colors hover:border-dark"
-              aria-label="Previous testimonial"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-muted/20 transition-colors hover:border-primary hover:text-primary"
+              aria-label="Previous"
             >
-              <ArrowLeft className="h-5 w-5 text-dark" />
+              <ArrowLeft className="h-5 w-5" />
             </button>
             <button
               type="button"
               onClick={next}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-muted/20 transition-colors hover:border-dark"
-              aria-label="Next testimonial"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-muted/20 transition-colors hover:border-primary hover:text-primary"
+              aria-label="Next"
             >
-              <ArrowRight className="h-5 w-5 text-dark" />
+              <ArrowRight className="h-5 w-5" />
             </button>
           </div>
         </div>
 
-        {/* Testimonial content — left-aligned */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -80,38 +78,40 @@ export default function Testimonials() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.4 }}
+            className="rounded-2xl bg-white p-10"
           >
-            {/* Avatar + name row */}
-            <div className="mb-8 flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-muted/10">
-                <span className="text-sm font-bold text-dark">
+            <span className="mb-4 block text-5xl font-bold leading-none text-primary/15">
+              &ldquo;
+            </span>
+            <p className="max-w-3xl text-lg leading-relaxed text-dark">
+              {testimonial.quote}
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                <span className="text-sm font-bold text-primary">
                   {testimonial.name.split(" ").map(n => n[0]).join("")}
                 </span>
               </div>
               <div>
-                <p className="text-base font-semibold text-dark">{testimonial.name}</p>
-                <p className="text-sm text-primary">{testimonial.title}</p>
+                <p className="text-sm font-semibold text-dark">{testimonial.name}</p>
+                <p className="text-xs text-primary">{testimonial.title}</p>
               </div>
             </div>
-
-            <p className="max-w-3xl text-lg leading-relaxed text-dark">
-              {testimonial.quote}
-            </p>
           </motion.div>
         </AnimatePresence>
 
-        {/* Progress bar */}
-        <div className="mt-12 flex gap-1">
+        {/* Progress dots */}
+        <div className="mt-8 flex gap-2">
           {TESTIMONIALS.map((_, index) => (
             <button
               key={index}
               type="button"
               onClick={() => setCurrent(index)}
-              className="h-0.5 flex-1 rounded-full transition-colors"
+              className={`h-1.5 w-8 rounded-full transition-all ${
+                index === current ? "bg-primary" : "bg-muted/15"
+              }`}
               aria-label={`Go to testimonial ${index + 1}`}
-            >
-              <div className={`h-full rounded-full transition-all ${index === current ? "bg-dark" : "bg-muted/15"}`} />
-            </button>
+            />
           ))}
         </div>
       </div>

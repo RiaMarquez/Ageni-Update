@@ -4,27 +4,27 @@ import { FOOTER_COLUMNS } from "@/lib/constants";
 export default function Footer() {
   return (
     <footer className="bg-dark text-white">
+      {/* Golden separator */}
+      <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Brand column */}
           <div>
             <p className="text-xl font-bold tracking-tight">
               ageni<span className="text-primary">.ai</span>
             </p>
-            <p className="mt-1 text-xs text-white/50">by Iozera Inc.</p>
-            <p className="mt-4 text-sm leading-relaxed text-white/60">
+            <p className="mt-1 text-xs text-white/40">by Iozera Inc.</p>
+            <p className="mt-4 text-sm leading-relaxed text-white/50">
               AI literacy training and certification that proves real
               competence. Trusted by employers, universities, and
               professionals worldwide.
             </p>
-
-            {/* Social links */}
             <div className="mt-6 flex gap-3">
               <a
                 href="https://linkedin.com/company/ageni-ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/50 transition-colors hover:border-primary hover:text-primary"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-primary hover:text-primary"
                 aria-label="LinkedIn"
               >
                 <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
@@ -36,13 +36,13 @@ export default function Footer() {
 
           {FOOTER_COLUMNS.map((col) => (
             <div key={col.title}>
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/80">
+              <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 {col.title}
               </h4>
               <ul className="space-y-2">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-sm text-white/50 transition-colors hover:text-primary">
+                    <Link href={link.href} className="text-sm text-white/40 transition-colors hover:text-white">
                       {link.label}
                     </Link>
                   </li>
@@ -52,33 +52,21 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Newsletter + copyright */}
-        <div className="mt-14 border-t border-white/10 pt-8">
+        <div className="mt-14 border-t border-white/8 pt-8">
           <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
-            <div className="flex items-center gap-4">
-              <p className="text-sm font-medium text-white/60">Subscribe to the newsletter</p>
-              <form action="#" className="flex items-center gap-2">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white placeholder-white/30 outline-none transition-colors focus:border-primary"
-                />
-                <button
-                  type="submit"
-                  className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-white transition-colors hover:brightness-110"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
+            <form action="#" className="flex items-center gap-2">
+              <input
+                type="email" placeholder="Your email"
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder-white/30 outline-none transition-all focus:border-primary"
+              />
+              <button type="submit" className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-dark transition-colors hover:brightness-110">
+                Subscribe
+              </button>
+            </form>
 
             <div className="flex items-center gap-6">
-              <Link href="/privacy-policy" className="text-xs text-white/30 transition-colors hover:text-white/60">
-                Privacy Policy
-              </Link>
-              <p className="text-xs text-white/30">
-                &copy; {new Date().getFullYear()} ageni.ai &mdash; All rights reserved.
-              </p>
+              <Link href="/privacy-policy" className="text-xs text-white/25 transition-colors hover:text-white/50">Privacy Policy</Link>
+              <p className="text-xs text-white/25">&copy; {new Date().getFullYear()} ageni.ai</p>
             </div>
           </div>
         </div>

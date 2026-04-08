@@ -1,59 +1,25 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
-const STATS = [
-  { value: "2026", label: "Year of launch" },
-  { value: "4", label: "University partners" },
-  { value: "4", label: "Audience tiers" },
-  { value: "24/7", label: "AI avatar tutor" },
-];
+const BookShelf = dynamic(() => import("@/components/BookShelf"), { ssr: false });
 
 export default function Numbers() {
   return (
-    <SectionWrapper className="bg-white py-20">
+    <SectionWrapper className="relative z-10 -mt-14 rounded-[1.5rem] bg-white pt-16 pb-8 lg:-mt-20 lg:rounded-[3rem] lg:pt-24 lg:pb-12">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Left — Numbers */}
-          <div className="lg:border-r lg:border-muted/15 lg:pr-12">
-            <h2 className="mb-10 text-5xl font-medium italic text-dark sm:text-6xl lg:text-7xl">
-              Numbers
-            </h2>
-
-            <div className="space-y-0">
-              {STATS.map((stat) => (
-                <div key={stat.label} className="flex items-baseline gap-4 border-b border-muted/10 py-4">
-                  <p className="text-2xl font-medium text-dark">{stat.value}</p>
-                  <p className="text-sm text-muted">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-
-            <p className="mt-8 text-sm leading-relaxed text-muted">
-              ageni.ai is designed to scale AI literacy across the Philippines and
-              Southeast Asia. With university partnerships, enterprise upskilling
-              programs, and a 24/7 AI avatar tutor, we are building the
-              infrastructure for a workforce that is not just AI-aware but
-              AI-competent.
-            </p>
-          </div>
-
-          {/* Right — Advisory */}
-          <div>
-            <h2 className="mb-10 text-5xl font-medium italic text-dark sm:text-6xl lg:text-7xl">
-              Advisory
-            </h2>
-
-            {/* Photo placeholder */}
-            <div className="mb-8 h-48 w-full rounded-2xl bg-muted/10" />
-
-            <p className="text-sm leading-relaxed text-muted">
-              Our advisory board brings together educators, enterprise leaders,
-              and AI practitioners to ensure ageni.ai stays grounded in
-              real-world needs. Every curriculum decision is informed by the
-              people closest to the workforce.
-            </p>
-          </div>
+        {/* AI Tools Bookshelf */}
+        <div>
+          <h3 className="font-title mb-3 text-center text-3xl font-semibold italic text-dark sm:text-4xl">
+            Learn to <span className="text-primary">prompt</span> the right tools
+          </h3>
+          <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-muted">
+            Knowing which AI to use is half the skill. ageni.ai teaches you how
+            to choose the right LLM for every task — and how to prompt it
+            properly to get the best output, every time.
+          </p>
+          <BookShelf />
         </div>
       </div>
     </SectionWrapper>

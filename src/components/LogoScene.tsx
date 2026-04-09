@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { useGLTF, Environment } from "@react-three/drei"
+import { useGLTF } from "@react-three/drei"
 import * as THREE from "three"
 
 function Logo() {
@@ -46,11 +46,13 @@ export default function LogoScene() {
     <Canvas
       camera={{ position: [0, 0, 4], fov: 45 }}
       style={{ width: "100%", height: "100%" }}
-      gl={{ antialias: true, alpha: true }}
+      gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
+      frameloop="always"
+      dpr={[1, 1.5]}
     >
-      <ambientLight intensity={0.6} />
+      <ambientLight intensity={0.8} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
-      <Environment preset="city" />
+      <directionalLight position={[-3, -2, 4]} intensity={0.4} />
       <Logo />
     </Canvas>
   )

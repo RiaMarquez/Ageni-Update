@@ -114,20 +114,24 @@ export default function Differentiators() {
       >
         {/* Pinned viewport — full screen height */}
         <div className="sticky top-0 h-screen">
-          {/* Background videos — full width, crossfade based on active card */}
-          {VIDEOS.map((src, i) => (
-            <video
-              key={src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-                activeIndex === i ? "opacity-[0.15]" : "opacity-0"
-              }`}
-              src={src}
-            />
-          ))}
+          {/* Background videos — only load active + adjacent, crossfade */}
+          {VIDEOS.map((src, i) => {
+            const shouldLoad = Math.abs(activeIndex - i) <= 1;
+            if (!shouldLoad) return null;
+            return (
+              <video
+                key={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                  activeIndex === i ? "opacity-[0.15]" : "opacity-0"
+                }`}
+                src={src}
+              />
+            );
+          })}
 
           <div className="relative z-10 mx-auto grid h-full w-full max-w-7xl gap-12 px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             {/* Left — Header, vertically centered */}

@@ -26,10 +26,20 @@ export default function SplashScreen() {
       video.addEventListener("canplaythrough", handleCanPlay, { once: true });
     }
 
+    // Fallback: skip splash after 4s if video never loads
+    const timeout = setTimeout(() => {
+      setFadingOut(true);
+      setTimeout(() => {
+        setHidden(true);
+        onSplashDone();
+      }, 600);
+    }, 4000);
+
     return () => {
       video.removeEventListener("canplaythrough", handleCanPlay);
+      clearTimeout(timeout);
     };
-  }, []);
+  }, [onSplashDone]);
 
   const handleEnded = () => {
     setFadingOut(true);

@@ -6,8 +6,10 @@ import Image from "next/image";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, SERVICE_MENU } from "@/lib/constants";
+import { useSplash } from "@/components/ui/SplashContext";
 
 export default function Navbar() {
+  const { splashDone } = useSplash();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -24,8 +26,11 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-light rounded-b-[5rem] ${
+    <motion.nav
+      initial={{ opacity: 0, y: -30 }}
+      animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 bg-light rounded-b-[5rem] ${
         scrolled ? "shadow-md" : ""
       }`}
     >
@@ -152,6 +157,6 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

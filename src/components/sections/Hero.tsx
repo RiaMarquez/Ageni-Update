@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, X, Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ParticleBackground from "@/components/ui/ParticleBackground";
+import { useSplash } from "@/components/ui/SplashContext";
 
 const FEATURES = [
   {
@@ -25,6 +26,7 @@ const FEATURES = [
 ];
 
 export default function Hero() {
+  const { splashDone } = useSplash();
   const [expanded, setExpanded] = useState(false);
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(false);
@@ -150,12 +152,12 @@ export default function Hero() {
           {/* Left — Copy */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={splashDone ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mb-6 text-xs font-semibold uppercase tracking-[0.3em] text-primary"
             >
@@ -170,7 +172,7 @@ export default function Hero() {
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.6, delay: 0.8 }}
               className="mt-6 max-w-lg"
             >
@@ -190,7 +192,7 @@ export default function Hero() {
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.6, delay: 1.0 }}
               className="mt-8 flex flex-wrap gap-4"
             >
@@ -212,7 +214,7 @@ export default function Hero() {
             {/* Bottom layer — video2 (orange), -12deg, shifted down-left */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1, rotate: -9, x: isMobile ? -10 : -30, y: isMobile ? 40 : 100 }}
+              animate={splashDone ? { opacity: 1, scale: 1, rotate: -9, x: isMobile ? -10 : -30, y: isMobile ? 40 : 100 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               className="absolute inset-0 z-0 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
             >
@@ -226,7 +228,7 @@ export default function Hero() {
             {/* Middle layer — video1 (red), -4deg, shifted up-right */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1, rotate: -4, x: isMobile ? 10 : 30, y: isMobile ? -50 : -140 }}
+              animate={splashDone ? { opacity: 1, scale: 1, rotate: -4, x: isMobile ? 10 : 30, y: isMobile ? -50 : -140 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.6, delay: 0.7 }}
               className="absolute inset-0 z-10 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
             >
@@ -240,7 +242,7 @@ export default function Hero() {
             {/* Top layer — hero-video (yellow), 12deg, centered */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1, rotate: 10, x: isMobile ? -5 : -10, y: isMobile ? -10 : -30 }}
+              animate={splashDone ? { opacity: 1, scale: 1, rotate: 10, x: isMobile ? -5 : -10, y: isMobile ? -10 : -30 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.6, delay: 0.9 }}
               data-cursor-text="Watch"
               onClick={openExpanded}
@@ -259,7 +261,7 @@ export default function Hero() {
         {/* Golden rule */}
         <motion.div
           initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
+          animate={splashDone ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{ duration: 1.2, delay: 1.2, ease: "easeOut" }}
           className="mt-10 h-px origin-left bg-gradient-to-r from-primary/60 via-primary/20 to-transparent lg:mt-16"
         />
@@ -270,7 +272,7 @@ export default function Hero() {
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 1.3 + i * 0.15 }}
             >
               <h3 className="flex items-center gap-2 text-base font-bold italic text-white">

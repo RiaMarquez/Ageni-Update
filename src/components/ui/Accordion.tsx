@@ -52,15 +52,22 @@ type AccordionProps = {
 };
 
 export default function Accordion({ items }: AccordionProps) {
+  const mid = Math.ceil(items.length / 2);
+  const left = items.slice(0, mid);
+  const right = items.slice(mid);
+
   return (
-    <div className="grid gap-4 md:grid-cols-2">
-      {items.map((item) => (
-        <AccordionItem
-          key={item.question}
-          question={item.question}
-          answer={item.answer}
-        />
-      ))}
+    <div className="flex flex-col gap-4 md:flex-row">
+      <div className="flex flex-1 flex-col gap-4">
+        {left.map((item) => (
+          <AccordionItem key={item.question} question={item.question} answer={item.answer} />
+        ))}
+      </div>
+      <div className="flex flex-1 flex-col gap-4">
+        {right.map((item) => (
+          <AccordionItem key={item.question} question={item.question} answer={item.answer} />
+        ))}
+      </div>
     </div>
   );
 }

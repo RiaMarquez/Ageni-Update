@@ -7,7 +7,7 @@ import { PRICING_TIERS } from "@/lib/constants";
 
 export default function Pricing() {
   return (
-    <SectionWrapper id="pricing" className="noise-bg relative -mt-8 overflow-hidden bg-dark py-16 lg:py-24">
+    <SectionWrapper id="pricing" className="noise-bg relative -mt-8 overflow-hidden rounded-t-[3rem] bg-dark py-16 lg:rounded-t-[5rem] lg:py-24">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <h2 className="font-title mb-4 text-4xl font-semibold italic text-white sm:text-5xl lg:text-7xl">
           <span className="text-primary">Pricing</span>

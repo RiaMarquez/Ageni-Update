@@ -8,6 +8,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SplashScreen from "@/components/ui/SplashScreen";
+import { SplashProvider } from "@/components/ui/SplashContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 
 const cormorant = Cormorant_Garamond({
@@ -47,13 +48,15 @@ export default function RootLayout({
         />
       </head>
       <body className={`${cormorant.variable} ${hindMadurai.variable} ${mavenPro.variable} antialiased bg-light`}>
-        <CustomCursor />
-        <SplashScreen />
-        <Navbar />
-        {children}
-        <Footer />
-        {/* Fixed bottom viewport blur — content clears as it scrolls into view */}
-        <div className="pointer-events-none fixed bottom-0 left-0 z-50 h-36 w-full bg-gradient-to-t from-black/40 to-transparent backdrop-blur-[6px]" style={{ maskImage: 'linear-gradient(to top, black, transparent)', WebkitMaskImage: 'linear-gradient(to top, black, transparent)' }} />
+        <SplashProvider>
+          <CustomCursor />
+          <SplashScreen />
+          <Navbar />
+          {children}
+          <Footer />
+          {/* Fixed bottom viewport blur — content clears as it scrolls into view */}
+          <div className="pointer-events-none fixed bottom-0 left-0 z-50 h-36 w-full bg-gradient-to-t from-black/40 to-transparent backdrop-blur-[6px]" style={{ maskImage: 'linear-gradient(to top, black, transparent)', WebkitMaskImage: 'linear-gradient(to top, black, transparent)' }} />
+        </SplashProvider>
       </body>
     </html>
   );

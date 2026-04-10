@@ -8,7 +8,7 @@
   --color-light: #F5F3EE;
   --color-muted: #8A8472;
   --font-sans: var(--font-body), sans-serif;
-  --font-title: var(--font-title), "Cormorant Garamond", serif;
+  --font-title: var(--font-title), "Bricolage Grotesque", sans-serif;
   --font-subtitle: var(--font-subtitle), "Hind Madurai", sans-serif;
 }
 
@@ -27,8 +27,9 @@ body { font-family: var(--font-body), "Maven Pro", sans-serif; color: var(--colo
 ::selection { background: var(--color-primary); color: var(--color-dark); }
 
 /* Font utility classes */
-.font-title { font-family: var(--font-title), "Cormorant Garamond", serif; }
+.font-title { font-family: var(--font-title), "Bricolage Grotesque", sans-serif; }
 .font-subtitle { font-family: var(--font-subtitle), "Hind Madurai", sans-serif; }
+.font-comfortaa { font-family: var(--font-comfortaa), "Comfortaa", sans-serif; }
 
 /* Noise texture overlay for dark sections */
 .noise-bg::after {

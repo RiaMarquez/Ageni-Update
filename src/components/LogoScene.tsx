@@ -50,9 +50,9 @@ export default function LogoScene() {
       frameloop="always"
       dpr={[1, 1.5]}
     >
-      <ambientLight intensity={0.8} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-      <directionalLight position={[-3, -2, 4]} intensity={0.4} />
+      <ambientLight intensity={1.0} />
+      <directionalLight position={[0, 1, 5]} intensity={1.2} />
+      <directionalLight position={[0, -1, 4]} intensity={0.5} />
       <Logo />
     </Canvas>
   )

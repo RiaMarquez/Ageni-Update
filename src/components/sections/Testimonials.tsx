@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 const TESTIMONIALS = [
@@ -42,73 +42,89 @@ export default function Testimonials() {
     return () => clearInterval(interval);
   }, [next]);
 
-  const testimonial = TESTIMONIALS[current];
-
   return (
-    <SectionWrapper className="bg-light py-16 lg:py-24">
+    <SectionWrapper className="bg-light py-20 lg:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-14 flex items-end justify-between">
-          <h2 className="font-title text-5xl font-semibold italic text-dark sm:text-6xl lg:text-7xl">
-            What they <span className="text-primary">say</span>
-          </h2>
+        {/* Header */}
+        <div className="mb-16 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+              Testimonials
+            </p>
+            <h2 className="font-title text-4xl font-semibold text-dark sm:text-5xl lg:text-6xl">
+              What they <span className="text-primary italic">say</span>
+            </h2>
+          </div>
           <div className="flex gap-3">
             <button
               type="button"
               onClick={prev}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-muted/20 transition-colors hover:border-primary hover:text-primary"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-dark/10 text-dark/40 transition-all hover:border-primary hover:text-primary hover:shadow-md hover:shadow-primary/10"
               aria-label="Previous"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-4 w-4" />
             </button>
             <button
               type="button"
               onClick={next}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-muted/20 transition-colors hover:border-primary hover:text-primary"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-dark/10 text-dark/40 transition-all hover:border-primary hover:text-primary hover:shadow-md hover:shadow-primary/10"
               aria-label="Next"
             >
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </div>
 
+        {/* Single card with animation */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.4 }}
-            className="rounded-2xl bg-white p-10"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.35 }}
+            className="relative overflow-hidden rounded-2xl border border-primary/20 bg-white p-10 shadow-xl shadow-primary/[0.06] md:p-12"
           >
-            <span className="mb-4 block text-5xl font-bold leading-none text-primary/15">
-              &ldquo;
-            </span>
-            <p className="max-w-3xl text-lg leading-relaxed text-dark">
-              {testimonial.quote}
-            </p>
-            <div className="mt-8 flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <span className="text-sm font-bold text-primary">
-                  {testimonial.name.split(" ").map(n => n[0]).join("")}
-                </span>
-              </div>
+            {/* Gold accent line */}
+            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
+
+            <div className="grid items-center gap-10 md:grid-cols-[1fr_auto]">
               <div>
-                <p className="text-sm font-semibold text-dark">{testimonial.name}</p>
-                <p className="text-xs text-primary">{testimonial.title}</p>
+                {/* Quote icon */}
+                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                  <Quote className="h-4 w-4 text-primary" />
+                </div>
+
+                <p className="max-w-2xl text-lg leading-relaxed text-dark/80 md:text-xl">
+                  {TESTIMONIALS[current].quote}
+                </p>
+              </div>
+
+              {/* Author */}
+              <div className="flex items-center gap-4 border-t border-dark/[0.05] pt-6 md:border-l md:border-t-0 md:pl-10 md:pt-0">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
+                  <span className="text-sm font-bold">
+                    {TESTIMONIALS[current].name.split(" ").map(n => n[0]).join("")}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-dark">{TESTIMONIALS[current].name}</p>
+                  <p className="text-xs text-primary">{TESTIMONIALS[current].title}</p>
+                </div>
               </div>
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Progress dots */}
-        <div className="mt-8 flex gap-2">
+        {/* Progress bar */}
+        <div className="mt-12 flex justify-center gap-2">
           {TESTIMONIALS.map((_, index) => (
             <button
               key={index}
               type="button"
               onClick={() => setCurrent(index)}
-              className={`h-1.5 w-8 rounded-full transition-all ${
-                index === current ? "bg-primary" : "bg-muted/15"
+              className={`h-1 rounded-full transition-all duration-300 ${
+                index === current ? "w-12 bg-primary" : "w-6 bg-dark/10"
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />

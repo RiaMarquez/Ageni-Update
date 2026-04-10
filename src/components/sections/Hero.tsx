@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, X, Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ParticleBackground from "@/components/ui/ParticleBackground";
-import { useSplash } from "@/components/ui/SplashContext";
+
 
 const FEATURES = [
   {
@@ -26,7 +26,6 @@ const FEATURES = [
 ];
 
 export default function Hero() {
-  const { splashDone } = useSplash();
   const [expanded, setExpanded] = useState(false);
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(false);
@@ -121,18 +120,24 @@ export default function Hero() {
         setCurrentTime(formatTime(v.currentTime));
       };
       const onMeta = () => setDuration(formatTime(v.duration));
+      const onPlay = () => setPlaying(true);
+      const onPause = () => setPlaying(false);
       v.addEventListener("timeupdate", onTime);
       v.addEventListener("loadedmetadata", onMeta);
+      v.addEventListener("play", onPlay);
+      v.addEventListener("pause", onPause);
       if (v.duration) onMeta();
       return () => {
         v.removeEventListener("timeupdate", onTime);
         v.removeEventListener("loadedmetadata", onMeta);
+        v.removeEventListener("play", onPlay);
+        v.removeEventListener("pause", onPause);
       };
     }
   }, [expanded]);
 
   return (
-    <section className="relative overflow-hidden bg-dark pt-24 pb-24 mt-[88px] rounded-t-[3rem] lg:pt-32 lg:pb-40 lg:rounded-t-[5rem]">
+    <section className="relative overflow-hidden bg-dark pt-20 pb-24 mt-[88px] rounded-t-[3rem] lg:pt-28 lg:pb-40 lg:rounded-t-[5rem]">
       {/* Three.js particle wave / sphere background */}
       <ParticleBackground />
 
@@ -150,32 +155,14 @@ export default function Hero() {
         {/* Hero content */}
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left — Copy */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={splashDone ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mb-6 text-xs font-semibold uppercase tracking-[0.3em] text-primary"
-            >
-              AI-Powered Learning Platform
-            </motion.p>
-
+          <div>
             <h1 className="font-title text-4xl font-semibold leading-[0.95] text-white sm:text-5xl lg:text-6xl">
               Ageni is a virtual learning platform to{" "}
               <em className="italic">power the next generation</em>,{" "}
               <em className="italic text-primary">wherever they might be.</em>
             </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-6 max-w-lg"
-            >
+            <div className="mt-6 max-w-lg">
               <p className="font-subtitle text-base leading-relaxed text-white/50">
                 Designed for students, professionals, founders, and business
                 owners. Learners develop applied skills in{" "}
@@ -188,14 +175,9 @@ export default function Hero() {
               <p className="mt-4 font-subtitle text-sm italic text-white/35">
                 AI adoption has outpaced practical AI skill. Ageni addresses that directly.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.6, delay: 1.0 }}
-              className="mt-8 flex flex-wrap gap-4"
-            >
+            <div className="mt-8 flex flex-wrap gap-4">
               <Button href="#contact" variant="cta" arrow>
                 Contact us
               </Button>
@@ -206,47 +188,43 @@ export default function Hero() {
               >
                 View Pricing
               </Button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Right — Stacked video collage */}
           <div className="relative aspect-[4/3] sm:aspect-video">
             {/* Bottom layer — video2 (orange), -12deg, shifted down-left */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={splashDone ? { opacity: 1, scale: 1, rotate: -9, x: isMobile ? -10 : -30, y: isMobile ? 40 : 100 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+            <div
               className="absolute inset-0 z-0 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
+              style={{ transform: `rotate(3deg) translate(${isMobile ? -10 : -30}px, ${isMobile ? -8 : 52}px)` }}
             >
               <video
                 autoPlay loop muted playsInline disablePictureInPicture
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover grayscale"
                 src="/media/video2.mp4"
               />
-            </motion.div>
+              <div className="absolute inset-0 bg-black/50" />
+            </div>
 
             {/* Middle layer — video1 (red), -4deg, shifted up-right */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={splashDone ? { opacity: 1, scale: 1, rotate: -4, x: isMobile ? 10 : 30, y: isMobile ? -50 : -140 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
+            <div
               className="absolute inset-0 z-10 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
+              style={{ transform: `rotate(5deg) translate(${isMobile ? 10 : 30}px, ${isMobile ? 14 : -76}px)` }}
             >
               <video
                 autoPlay loop muted playsInline disablePictureInPicture
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover grayscale"
                 src="/media/video1.mp4"
               />
-            </motion.div>
+              <div className="absolute inset-0 bg-black/50" />
+            </div>
 
             {/* Top layer — hero-video (yellow), 12deg, centered */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={splashDone ? { opacity: 1, scale: 1, rotate: 10, x: isMobile ? -5 : -10, y: isMobile ? -10 : -30 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
+            <div
               data-cursor-text="Watch"
               onClick={openExpanded}
               className="absolute inset-0 z-20 cursor-none overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
+              style={{ transform: `rotate(10deg) translate(${isMobile ? -5 : -10}px, ${isMobile ? 22 : 2}px)` }}
             >
               <video
                 ref={inlineVideoRef}
@@ -254,27 +232,19 @@ export default function Hero() {
                 className="h-full w-full object-cover"
                 src="/media/hero-video.mp4"
               />
-            </motion.div>
+            </div>
           </div>
         </div>
 
         {/* Golden rule */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={splashDone ? { scaleX: 1 } : { scaleX: 0 }}
-          transition={{ duration: 1.2, delay: 1.2, ease: "easeOut" }}
+        <div
           className="mt-10 h-px origin-left bg-gradient-to-r from-primary/60 via-primary/20 to-transparent lg:mt-16"
         />
 
         {/* Features row — part of hero, watermark shows through */}
         <div className="mt-10 grid gap-8 md:grid-cols-3 lg:mt-16 lg:gap-10">
-          {FEATURES.map((feature, i) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 1.3 + i * 0.15 }}
-            >
+          {FEATURES.map((feature) => (
+            <div key={feature.title}>
               <h3 className="flex items-center gap-2 text-base font-bold italic text-white">
                 <ArrowUpRight className="h-4 w-4 shrink-0 text-primary" />
                 {feature.title}
@@ -282,7 +252,7 @@ export default function Hero() {
               <p className="mt-3 text-sm leading-relaxed text-white/40">
                 {feature.description}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

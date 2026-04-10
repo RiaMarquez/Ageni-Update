@@ -2,30 +2,45 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { Plus } from "lucide-react";
 
 type AccordionItemData = {
   question: string;
   answer: string;
 };
 
-function AccordionItem({ question, answer }: AccordionItemData) {
+function AccordionItem({ question, answer, index }: AccordionItemData & { index: number }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="rounded-2xl border border-muted/10 bg-white transition-all hover:shadow-sm">
+    <div
+      className={`group border-b border-dark/[0.06] transition-colors ${
+        open ? "bg-white" : "hover:bg-white/60"
+      }`}
+    >
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+        className="flex w-full items-center gap-6 px-6 py-6 text-left md:px-8"
       >
-        <span className="text-sm font-medium text-dark">{question}</span>
+        <span className={`shrink-0 text-xs font-semibold tabular-nums transition-colors ${
+          open ? "text-primary" : "text-dark/20"
+        }`}>
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className={`flex-1 text-[15px] font-medium transition-colors ${
+          open ? "text-dark" : "text-dark/70"
+        }`}>
+          {question}
+        </span>
         <motion.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-dark text-white"
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.25 }}
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
+            open ? "bg-primary text-white" : "bg-dark/[0.04] text-dark/30 group-hover:bg-dark/[0.08]"
+          }`}
         >
-          <ChevronDown className="h-5 w-5" />
+          <Plus className="h-4 w-4" />
         </motion.span>
       </button>
 
@@ -39,7 +54,9 @@ function AccordionItem({ question, answer }: AccordionItemData) {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="px-6 pb-6 text-sm leading-relaxed text-muted">{answer}</p>
+            <p className="px-6 pb-6 pl-[4.25rem] text-sm leading-relaxed text-muted md:pl-[4.75rem]">
+              {answer}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -52,22 +69,11 @@ type AccordionProps = {
 };
 
 export default function Accordion({ items }: AccordionProps) {
-  const mid = Math.ceil(items.length / 2);
-  const left = items.slice(0, mid);
-  const right = items.slice(mid);
-
   return (
-    <div className="flex flex-col gap-4 md:flex-row">
-      <div className="flex flex-1 flex-col gap-4">
-        {left.map((item) => (
-          <AccordionItem key={item.question} question={item.question} answer={item.answer} />
-        ))}
-      </div>
-      <div className="flex flex-1 flex-col gap-4">
-        {right.map((item) => (
-          <AccordionItem key={item.question} question={item.question} answer={item.answer} />
-        ))}
-      </div>
+    <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-dark/[0.06]">
+      {items.map((item, i) => (
+        <AccordionItem key={item.question} question={item.question} answer={item.answer} index={i} />
+      ))}
     </div>
   );
 }

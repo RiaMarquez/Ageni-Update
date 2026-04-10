@@ -174,10 +174,10 @@ const fragmentShader = /* glsl */ `
     alpha *= mix(0.3, 1.0, heightBoost);
 
     /* wave color (gold/primary) → sphere gradient */
-    vec3 waveCol    = vec3(0.88, 0.72, 0.22);    // bright gold
-    vec3 sphereCol1 = vec3(0.55, 0.38, 0.02);    // dark gold
-    vec3 sphereCol2 = vec3(1.0, 0.85, 0.4);      // bright gold
-    vec3 fresnelCol = vec3(1.0, 0.82, 0.2);      // hot amber edge
+    vec3 waveCol    = vec3(0.44, 0.36, 0.11);    // dark gold
+    vec3 sphereCol1 = vec3(0.28, 0.19, 0.01);    // very dark gold
+    vec3 sphereCol2 = vec3(0.50, 0.42, 0.20);    // muted gold
+    vec3 fresnelCol = vec3(0.50, 0.41, 0.10);    // dim amber edge
 
     vec3 sphereCol = mix(sphereCol2, sphereCol1, vDepth);
     vec3 col = mix(waveCol, sphereCol, smoothstep(0.0, 0.6, uMorph));

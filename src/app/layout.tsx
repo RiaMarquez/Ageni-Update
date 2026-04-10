@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
-  Cormorant_Garamond,
+  Bricolage_Grotesque,
+  Comfortaa,
   Hind_Madurai,
   Maven_Pro,
 } from "next/font/google";
@@ -11,9 +12,9 @@ import SplashScreen from "@/components/ui/SplashScreen";
 import { SplashProvider } from "@/components/ui/SplashContext";
 import CustomCursor from "@/components/ui/CustomCursor";
 
-const cormorant = Cormorant_Garamond({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-title",
 });
 
@@ -21,6 +22,12 @@ const hindMadurai = Hind_Madurai({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-subtitle",
+});
+
+const comfortaa = Comfortaa({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-comfortaa",
 });
 
 const mavenPro = Maven_Pro({
@@ -47,7 +54,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${cormorant.variable} ${hindMadurai.variable} ${mavenPro.variable} antialiased bg-light`}>
+      <body className={`${bricolage.variable} ${comfortaa.variable} ${hindMadurai.variable} ${mavenPro.variable} antialiased bg-light`}>
         <SplashProvider>
           <CustomCursor />
           <SplashScreen />

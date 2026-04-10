@@ -1,48 +1,133 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useSplash } from "./SplashContext";
 
 export default function SplashScreen() {
-  const [videoReady, setVideoReady] = useState(false);
-  const [fadingOut, setFadingOut] = useState(false);
+  const [phase, setPhase] = useState<"loading" | "video" | "fadeout">("loading");
   const [hidden, setHidden] = useState(false);
+  const [percent, setPercent] = useState(0);
+  const [displayPercent, setDisplayPercent] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { onSplashDone } = useSplash();
 
+  // Smoothly animate displayed percentage toward actual percent
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    if (displayPercent >= percent) return;
+    const timer = setTimeout(() => {
+      setDisplayPercent((prev) => Math.min(prev + 1, percent));
+    }, 18);
+    return () => clearTimeout(timer);
+  }, [displayPercent, percent]);
 
-    const handleCanPlay = () => {
-      setVideoReady(true);
-      video.play();
+  // Track page resource loading progress
+  useEffect(() => {
+    let cancelled = false;
+    const tasks: Array<{ done: boolean }> = [];
+
+    const updateProgress = () => {
+      if (cancelled) return;
+      const completed = tasks.filter((t) => t.done).length;
+      const total = tasks.length || 1;
+      setPercent(Math.round((completed / total) * 100));
     };
 
-    // If already buffered (e.g. cached), start immediately
-    if (video.readyState >= 3) {
-      handleCanPlay();
-    } else {
-      video.addEventListener("canplaythrough", handleCanPlay, { once: true });
+    const addTask = () => {
+      const task = { done: false };
+      tasks.push(task);
+      return () => {
+        task.done = true;
+        updateProgress();
+      };
+    };
+
+    // 1. Splash video itself
+    const markVideo = addTask();
+    const video = videoRef.current;
+    if (video) {
+      if (video.readyState >= 3) {
+        markVideo();
+      } else {
+        video.addEventListener("canplaythrough", markVideo, { once: true });
+      }
     }
 
-    // Fallback: skip splash after 4s if video never loads
-    const timeout = setTimeout(() => {
-      setFadingOut(true);
+    // 2. Fonts
+    const markFonts = addTask();
+    document.fonts.ready.then(markFonts);
+
+    // 3. All images currently in DOM
+    const images = Array.from(document.images);
+    images.forEach((img) => {
+      const mark = addTask();
+      if (img.complete) {
+        mark();
+      } else {
+        img.addEventListener("load", mark, { once: true });
+        img.addEventListener("error", mark, { once: true });
+      }
+    });
+
+    // 4. All videos currently in DOM (other than splash)
+    const videos = Array.from(document.querySelectorAll("video")).filter(
+      (v) => v !== video
+    );
+    videos.forEach((v) => {
+      const mark = addTask();
+      if (v.readyState >= 2) {
+        mark();
+      } else {
+        v.addEventListener("loadeddata", mark, { once: true });
+        v.addEventListener("error", mark, { once: true });
+      }
+    });
+
+    // 5. Window load event (catches remaining resources like stylesheets, scripts)
+    const markWindow = addTask();
+    if (document.readyState === "complete") {
+      markWindow();
+    } else {
+      window.addEventListener("load", markWindow, { once: true });
+    }
+
+    updateProgress();
+
+    // Fallback: force 100% after 8s no matter what
+    const fallback = setTimeout(() => {
+      if (!cancelled) setPercent(100);
+    }, 8000);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(fallback);
+    };
+  }, []);
+
+  // When percent hits 100 and display catches up, transition to video phase
+  const startVideo = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    setPhase("video");
+    video.play().catch(() => {
+      // autoplay blocked — skip to done
+      setPhase("fadeout");
       setTimeout(() => {
         setHidden(true);
         onSplashDone();
       }, 600);
-    }, 4000);
-
-    return () => {
-      video.removeEventListener("canplaythrough", handleCanPlay);
-      clearTimeout(timeout);
-    };
+    });
   }, [onSplashDone]);
 
+  useEffect(() => {
+    if (displayPercent >= 100 && phase === "loading") {
+      // Brief pause at 100% before starting video
+      const timer = setTimeout(startVideo, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [displayPercent, phase, startVideo]);
+
   const handleEnded = () => {
-    setFadingOut(true);
+    setPhase("fadeout");
     setTimeout(() => {
       setHidden(true);
       onSplashDone();
@@ -53,10 +138,31 @@ export default function SplashScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-dark transition-opacity duration-600 ${
-        fadingOut ? "opacity-0" : "opacity-100"
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black transition-opacity duration-600 ${
+        phase === "fadeout" ? "opacity-0" : "opacity-100"
       }`}
     >
+      {/* Loading percentage overlay */}
+      {phase === "loading" && (
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
+          <span
+            className="font-title text-[clamp(4rem,12vw,9rem)] font-semibold leading-none tracking-tight text-white/90 tabular-nums"
+            style={{ fontVariantNumeric: "tabular-nums" }}
+          >
+            {displayPercent}%
+          </span>
+          <div className="mt-6 h-[2px] w-48 overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full rounded-full bg-primary transition-[width] duration-150 ease-out"
+              style={{ width: `${displayPercent}%` }}
+            />
+          </div>
+          <p className="mt-4 text-xs font-medium uppercase tracking-[0.25em] text-white/30">
+            Loading
+          </p>
+        </div>
+      )}
+
       <video
         ref={videoRef}
         muted
@@ -66,7 +172,7 @@ export default function SplashScreen() {
         controlsList="noplaybackrate"
         onEnded={handleEnded}
         className={`h-full w-full object-cover transition-opacity duration-300 ${
-          videoReady ? "opacity-100" : "opacity-0"
+          phase === "video" || phase === "fadeout" ? "opacity-100" : "opacity-0"
         }`}
       >
         <source src="/media/loadup.mp4" type="video/mp4" />

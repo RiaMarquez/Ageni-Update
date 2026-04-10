@@ -10,19 +10,23 @@ export default function CustomCursor() {
   const pos = useRef({ x: -100, y: -100 });
   const rendered = useRef({ x: -100, y: -100 });
   const raf = useRef<number>(0);
+  const hoveredEl = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
     };
 
+    const readCursorText = (el: HTMLElement): string =>
+      el.getAttribute("data-cursor-text") ||
+      el.closest("[data-cursor-text]")?.getAttribute("data-cursor-text") ||
+      "";
+
     const onEnter = (e: Event) => {
       setHovering(true);
       const el = e.currentTarget as HTMLElement;
-      const text =
-        el.getAttribute("data-cursor-text") ||
-        el.closest("[data-cursor-text]")?.getAttribute("data-cursor-text") ||
-        "";
+      hoveredEl.current = el;
+      const text = readCursorText(el);
       if (text) setCursorText(text);
     };
     const onLeave = (e: Event) => {
@@ -31,6 +35,7 @@ export default function CustomCursor() {
       const related = (e as MouseEvent).relatedTarget as HTMLElement | null;
       // Don't clear if moving to another child inside the same data-cursor-text parent
       if (parent && related && parent.contains(related)) return;
+      hoveredEl.current = null;
       setHovering(false);
       setCursorText("");
     };
@@ -45,8 +50,28 @@ export default function CustomCursor() {
       });
     };
 
-    const observer = new MutationObserver(addListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
+    // Watch for attribute changes on data-cursor-text elements so the
+    // cursor label updates live (e.g. Play ↔ Pause) without needing
+    // to move the mouse out and back in.
+    const observer = new MutationObserver((mutations) => {
+      let needsRebind = false;
+      for (const m of mutations) {
+        if (m.type === "attributes" && m.attributeName === "data-cursor-text") {
+          const el = m.target as HTMLElement;
+          if (hoveredEl.current && (el === hoveredEl.current || el.contains(hoveredEl.current) || hoveredEl.current.closest("[data-cursor-text]") === el)) {
+            setCursorText(readCursorText(el));
+          }
+        }
+        if (m.type === "childList") needsRebind = true;
+      }
+      if (needsRebind) addListeners();
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["data-cursor-text"],
+    });
 
     window.addEventListener("mousemove", onMove);
     addListeners();

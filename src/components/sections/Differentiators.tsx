@@ -126,7 +126,7 @@ export default function Differentiators() {
                 muted
                 playsInline
                 className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-                  activeIndex === i ? "opacity-[0.15]" : "opacity-0"
+                  activeIndex === i ? "opacity-[0.30]" : "opacity-0"
                 }`}
                 src={src}
               />

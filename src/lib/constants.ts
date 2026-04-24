@@ -3,11 +3,11 @@
 /* ------------------------------------------------------------------ */
 
 export const NAV_LINKS = [
-  { label: "Our Work", href: "#" },
   { label: "Services", href: "#", hasDropdown: true },
   { label: "Partnerships", href: "/partnerships" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
+  { label: "FAQs", href: "/#faq" },
 ] as const;
 
 export const SERVICE_MENU = {
@@ -15,17 +15,17 @@ export const SERVICE_MENU = {
     {
       title: "AI Literacy Training",
       links: [
-        { label: "Pricing", href: "/#pricing" },
-        { label: "How It Works", href: "/#how-it-works" },
-        { label: "Differentiators", href: "/#differentiators" },
+        { label: "Pricing", href: "/#pricing", desc: "Plans for individuals & teams" },
+        { label: "How It Works", href: "/#how-it-works", desc: "Our three-step learning path" },
+        { label: "Differentiators", href: "/#differentiators", desc: "What sets ageni apart" },
       ],
     },
     {
       title: "Custom Job Skills Training",
       links: [
-        { label: "Service Overview", href: "/#service-pillars" },
-        { label: "Industries", href: "/#industries" },
-        { label: "FAQ", href: "/#faq" },
+        { label: "Service Overview", href: "/#service-pillars", desc: "Tailored AI skills programs" },
+        { label: "Industries", href: "/#industries", desc: "Sector-specific training" },
+        { label: "FAQ", href: "/#faq", desc: "Common questions answered" },
       ],
     },
   ],

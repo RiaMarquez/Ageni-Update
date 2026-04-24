@@ -7,7 +7,7 @@ const BookShelf = dynamic(() => import("@/components/BookShelf"), { ssr: false }
 
 export default function Numbers() {
   return (
-    <SectionWrapper className="relative z-10 -mt-14 rounded-[1.5rem] bg-white pt-16 pb-8 lg:-mt-20 lg:rounded-[3rem] lg:pt-24 lg:pb-12">
+    <SectionWrapper className="relative z-10 bg-white pt-28 pb-6 lg:pt-36 lg:pb-8">
       <div className="mx-auto max-w-7xl px-6">
         {/* AI Tools Bookshelf */}
         <div>

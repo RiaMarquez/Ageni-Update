@@ -448,7 +448,7 @@ export default function BookShelf() {
           left: 0,
           width: 100,
           height: "100%",
-          background: "linear-gradient(to right, #F5F3EE, transparent)",
+          background: "linear-gradient(to right, #ffffff, transparent)",
           zIndex: 20,
           pointerEvents: "none",
         }}
@@ -461,7 +461,7 @@ export default function BookShelf() {
           right: 0,
           width: 100,
           height: "100%",
-          background: "linear-gradient(to left, #F5F3EE, transparent)",
+          background: "linear-gradient(to left, #ffffff, transparent)",
           zIndex: 20,
           pointerEvents: "none",
         }}

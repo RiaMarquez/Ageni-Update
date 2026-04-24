@@ -142,22 +142,27 @@ export default function SplashScreen() {
         phase === "fadeout" ? "opacity-0" : "opacity-100"
       }`}
     >
-      {/* Loading percentage overlay */}
+      {/* Loading overlay */}
       {phase === "loading" && (
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 z-10 flex flex-col justify-end px-10 pb-10 sm:px-14 sm:pb-14">
+          {/* Percentage — bottom-left, large */}
           <span
-            className="font-title text-[clamp(4rem,12vw,9rem)] font-semibold leading-none tracking-tight text-white/90 tabular-nums"
+            className="font-title text-[clamp(4rem,14vw,10rem)] font-semibold leading-none tracking-tight text-white/90"
             style={{ fontVariantNumeric: "tabular-nums" }}
           >
             {displayPercent}%
           </span>
-          <div className="mt-6 h-[2px] w-48 overflow-hidden rounded-full bg-white/10">
+
+          {/* Progress bar — full width at the bottom */}
+          <div className="mt-5 h-[2px] w-full overflow-hidden rounded-full bg-white/10">
             <div
               className="h-full rounded-full bg-primary transition-[width] duration-150 ease-out"
               style={{ width: `${displayPercent}%` }}
             />
           </div>
-          <p className="mt-4 text-xs font-medium uppercase tracking-[0.25em] text-white/30">
+
+          {/* Label — right-aligned below the bar */}
+          <p className="mt-3 text-right text-[0.65rem] font-medium uppercase tracking-[0.3em] text-white/25">
             Loading
           </p>
         </div>

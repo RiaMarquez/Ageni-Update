@@ -1,66 +1,100 @@
 "use client";
 
-import Image from "next/image";
-import SectionWrapper from "@/components/ui/SectionWrapper";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import AdvisoryParticles from "@/components/ui/AdvisoryParticles";
 
+type Segment = { text: string; accent?: boolean; italic?: boolean };
+
+const LINE_1: Segment[] = [
+  { text: "The" },
+  { text: "gap" },
+  { text: "isn't" },
+  { text: "awareness." },
+];
+
+const LINE_2: Segment[] = [
+  { text: "It's" },
+  { text: "application.", accent: true, italic: true },
+];
+
+const LINES: Segment[][] = [LINE_1, LINE_2];
+const TOTAL_WORDS = LINES.reduce((sum, line) => sum + line.length, 0);
+
 export default function Advisory() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Indices for each word relative to the flat list so opacity windows stagger cleanly
+  let running = 0;
+  const lineOffsets = LINES.map((line) => {
+    const start = running;
+    running += line.length;
+    return start;
+  });
+
   return (
-    <SectionWrapper className="noise-bg relative -mt-6 overflow-hidden bg-dark pt-22 pb-16 lg:-mt-12 lg:pt-40 lg:pb-28">
-      {/* Floating particle field */}
-      <AdvisoryParticles />
-      {/* Golden accent line */}
-      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-px w-2/3 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+    <div className="bg-dark">
+      <div ref={ref} className="relative" style={{ height: "260vh" }}>
+        <div className="noise-bg sticky top-0 flex h-screen items-center overflow-hidden">
+          <AdvisoryParticles />
+          <div className="pointer-events-none absolute top-0 left-1/2 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* Left — Quote */}
-          <div>
-            <span className="mb-2 block text-7xl font-bold leading-none text-primary/20">
-              &ldquo;
-            </span>
-            <blockquote className="font-title text-2xl font-medium italic leading-relaxed text-white sm:text-3xl">
-              Most AI training is built for developers. ageni.ai is built
-              for everyone else&nbsp;&mdash; the employees who use AI every day
-              but have no training built for them.
-            </blockquote>
-            <div className="mt-8">
-              <p className="text-base font-semibold text-white">Timothy Ngo</p>
-              <p className="text-sm text-white/40">CEO, Iozera Inc.</p>
-            </div>
-          </div>
-
-          {/* Right — Photo placeholder with heartbeat + orbiting dot */}
-          <div className="flex items-center justify-center">
-            <div className="relative animate-advisory-heartbeat">
-              {/* Pulsing rings — expand outward and fade */}
-              {[0, 1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="absolute inset-0 rounded-full border border-primary/40"
-                  style={{
-                    animation: `advisory-ring-pulse 4s ease-out ${i * 1}s infinite`,
-                  }}
-                />
+          <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-center">
+            <h2 className="font-title text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl xl:text-7xl">
+              {LINES.map((line, lineIndex) => (
+                <span key={lineIndex} className="block">
+                  {line.map((seg, segIndex) => (
+                    <RevealWord
+                      key={`${lineIndex}-${segIndex}`}
+                      seg={seg}
+                      index={lineOffsets[lineIndex] + segIndex}
+                      total={TOTAL_WORDS}
+                      progress={scrollYProgress}
+                    />
+                  ))}
+                </span>
               ))}
-              <div className="h-64 w-64 rounded-full border-2 border-primary/30 bg-white/5 lg:h-80 lg:w-80 overflow-hidden">
-                <Image
-                  src="/media/icons/tim.png"
-                  alt="Timothy Ngo"
-                  width={320}
-                  height={320}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="absolute inset-6 rounded-full bg-white/5 pointer-events-none" />
-              {/* Orbiting golden dot */}
-              <div className="absolute inset-0 animate-advisory-orbit">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 h-6 w-6 rounded-full bg-primary/60 shadow-[0_0_12px_rgba(201,162,39,0.4)]" />
-              </div>
-            </div>
+            </h2>
           </div>
         </div>
       </div>
-    </SectionWrapper>
+    </div>
+  );
+}
+
+function RevealWord({
+  seg,
+  index,
+  total,
+  progress,
+}: {
+  seg: Segment;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  // reveal across the middle 65% of the runway — leaves room for entry and attribution fade-in
+  const REVEAL_START = 0.1;
+  const REVEAL_END = 0.75;
+  const span = REVEAL_END - REVEAL_START;
+  const start = REVEAL_START + (index / total) * span;
+  const end = REVEAL_START + ((index + 0.9) / total) * span;
+
+  const opacity = useTransform(progress, [start, end], [0.12, 1]);
+
+  return (
+    <motion.span
+      style={{ opacity }}
+      className={`inline-block ${seg.italic ? "italic" : ""} ${
+        seg.accent ? "text-primary" : "text-white"
+      }`}
+    >
+      {seg.text}
+      {" "}
+    </motion.span>
   );
 }

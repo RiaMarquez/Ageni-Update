@@ -88,6 +88,11 @@ export default function Hero() {
     v.currentTime = ratio * v.duration;
   }, []);
 
+  // Notify the navbar so it can hide while the video is open
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("hero-video-expanded", { detail: expanded }));
+  }, [expanded]);
+
   // Close on Escape or scroll
   useEffect(() => {
     if (!expanded) return;
@@ -137,7 +142,7 @@ export default function Hero() {
   }, [expanded]);
 
   return (
-    <section className="relative overflow-hidden bg-dark pt-20 pb-24 mt-[88px] rounded-t-[3rem] lg:pt-28 lg:pb-40 lg:rounded-t-[5rem]">
+    <section className="relative overflow-hidden bg-dark pt-12 pb-24 mt-[98px] rounded-t-[3rem] lg:pt-20 lg:pb-40 lg:rounded-t-[5rem]">
       {/* Three.js particle wave / sphere background */}
       <ParticleBackground />
 
@@ -196,7 +201,7 @@ export default function Hero() {
             {/* Bottom layer — video2 (orange), -12deg, shifted down-left */}
             <div
               className="absolute inset-0 z-0 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
-              style={{ transform: `rotate(3deg) translate(${isMobile ? -10 : -30}px, ${isMobile ? -8 : 52}px)` }}
+              style={{ transform: `rotate(3deg) translate(${isMobile ? 2 : -18}px, ${isMobile ? -40 : 20}px)` }}
             >
               <video
                 autoPlay loop muted playsInline disablePictureInPicture
@@ -224,7 +229,7 @@ export default function Hero() {
               data-cursor-text="Watch"
               onClick={openExpanded}
               className="absolute inset-0 z-20 cursor-none overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
-              style={{ transform: `rotate(10deg) translate(${isMobile ? -5 : -10}px, ${isMobile ? 22 : 2}px)` }}
+              style={{ transform: `rotate(0deg) translate(${isMobile ? 27 : 22}px, ${isMobile ? -10 : -30}px)` }}
             >
               <video
                 ref={inlineVideoRef}
@@ -265,7 +270,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/40 backdrop-blur-2xl"
+            className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/40 px-4 py-20 backdrop-blur-2xl"
             onClick={closeExpanded}
           >
             {/* Expanded video + custom controls */}
@@ -274,7 +279,10 @@ export default function Hero() {
               animate={{ scale: 1, rotate: 0 }}
               exit={{ scale: 0.85, rotate: 10, opacity: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-[92vw] max-w-6xl"
+              className="relative"
+              style={{
+                width: "min(96vw, calc((100vh - 200px) * 16 / 9), 1600px)",
+              }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button — outside top-right */}

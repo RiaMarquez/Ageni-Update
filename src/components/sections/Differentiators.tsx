@@ -14,10 +14,10 @@ const VIDEOS = [
 ];
 
 const CATEGORIES = [
-  "Certification",
-  "Assessment",
-  "Analytics",
-  "Delivery",
+  "Management",
+  "Career Credentials",
+  "Workplace Skills",
+  "Custom Training",
 ];
 
 export default function Differentiators() {
@@ -30,8 +30,8 @@ export default function Differentiators() {
         {/* Header row */}
         <div className="flex items-end justify-between gap-6 pb-10">
           <h2 className="font-title text-5xl font-semibold leading-[0.95] text-dark sm:text-6xl lg:text-7xl">
-            What makes us{" "}
-            <em className="italic text-primary">different</em>
+            Courses built for{" "}
+            <em className="italic text-primary">all stages</em>
           </h2>
           <Link
             href="#contact"
@@ -54,11 +54,11 @@ export default function Differentiators() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.55, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-12 items-center gap-6 border-b border-dark/10 py-10 lg:gap-10 lg:py-12"
+              className="grid grid-cols-12 items-center gap-3 border-b border-dark/10 py-5 lg:gap-5 lg:py-6"
             >
               {/* Thumbnail */}
-              <div className="col-span-12 md:col-span-3">
-                <div className="group relative aspect-[16/10] overflow-hidden rounded-2xl bg-dark/[0.04]">
+              <div className="col-span-12 md:col-span-5">
+                <div className="group relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-dark/[0.04] md:w-[70%]">
                   <video
                     autoPlay
                     muted
@@ -71,21 +71,21 @@ export default function Differentiators() {
               </div>
 
               {/* Title + category */}
-              <div className="col-span-12 md:col-span-4">
+              <div className="col-span-12 md:col-span-3 md:-ml-8">
                 <h3 className="font-title text-2xl font-semibold leading-tight text-dark lg:text-[32px]">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm font-medium text-primary">
+                <p className="mt-2 text-sm font-medium text-primary">
                   {CATEGORIES[i]}
                 </p>
               </div>
 
               {/* Description + actions */}
-              <div className="col-span-12 md:col-span-5">
+              <div className="col-span-12 md:col-span-4">
                 <p className="text-sm leading-relaxed text-dark/60 lg:text-base">
                   {item.description}
                 </p>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-4 flex flex-wrap gap-3">
                   <Link
                     href="#contact"
                     className="rounded-full border border-dark/15 bg-white px-5 py-2 text-sm font-medium text-dark transition-all hover:border-dark hover:bg-dark hover:text-white"

@@ -88,24 +88,24 @@ export const HOW_IT_WORKS = [
 
 export const DIFFERENTIATORS = [
   {
-    title: "Mastery-Verified Certification",
+    title: "Business Owners",
     description:
-      "Our PMA certification proves real competence, not just course completion. Employers trust it because every credential is backed by rigorous, anti-gaming assessments.",
+      "Learn how to use AI tools to manage your business, evaluate AI-assisted work, and apply AI to your operations. Understand prompt design, output evaluation, and AI risk identification. Access through promotional codes at three tiers: AI Literacy, Business Growth, or Advanced.",
   },
   {
-    title: "Anti-Gaming Assessment",
+    title: "University Students",
     description:
-      "Dynamic question pools, time-bounded challenges, and AI-powered proctoring ensure every certification reflects genuine skill — not memorization or shortcuts.",
+      "Access AI literacy training through your university. Complete the curriculum and earn a credential that proves genuine competency to employers. Available through institution-issued codes. Opens pathways to roles across Iozera's portfolio companies and international markets.",
   },
   {
-    title: "Employer Mastery Dashboard",
+    title: "Professionals & Employees",
     description:
-      "Give hiring managers and L&D teams a live view of candidate and employee AI skill levels with granular, role-specific analytics.",
+      "No technical background required. Learn to apply AI tools to real business functions—sales, operations, customer service, finance, management. Master prompt design, output evaluation, and AI risk identification at a price point businesses can justify.",
   },
   {
-    title: "Device-Agnostic & Self-Paced",
+    title: "Enterprise Teams",
     description:
-      "Learn from any device, on your own schedule. Our platform adapts to your pace so upskilling never disrupts your workflow.",
+      "For business owners needing scalable job training solutions. Build programs from your own SOPs, workflows, and role definitions. Train employees consistently across all locations and receive verified mastery records per employee. Priced per engagement.",
   },
 ] as const;
 

@@ -91,21 +91,25 @@ export const DIFFERENTIATORS = [
     title: "Business Owners",
     description:
       "Learn how to use AI tools to manage your business, evaluate AI-assisted work, and apply AI to your operations. Understand prompt design, output evaluation, and AI risk identification. Access through promotional codes at three tiers: AI Literacy, Business Growth, or Advanced.",
+    href: "/business-owners-more",
   },
   {
     title: "University Students",
     description:
       "Access AI literacy training through your university. Complete the curriculum and earn a credential that proves genuine competency to employers. Available through institution-issued codes. Opens pathways to roles across Iozera's portfolio companies and international markets.",
+    href: "#contact",
   },
   {
     title: "Professionals & Employees",
     description:
       "No technical background required. Learn to apply AI tools to real business functions—sales, operations, customer service, finance, management. Master prompt design, output evaluation, and AI risk identification at a price point businesses can justify.",
+    href: "#contact",
   },
   {
     title: "Enterprise Teams",
     description:
       "For business owners needing scalable job training solutions. Build programs from your own SOPs, workflows, and role definitions. Train employees consistently across all locations and receive verified mastery records per employee. Priced per engagement.",
+    href: "#contact",
   },
 ] as const;
 

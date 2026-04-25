@@ -22,6 +22,7 @@ export type CaseStudyTabItem = {
   label: string;
   previewCaption: string;
   previewSrc?: string;
+  description: string;
 };
 
 export type CaseStudyBreakdownItem = {

@@ -7,7 +7,7 @@ const POINTS = 6000;
 const FIELD_W = 20;
 const FIELD_H = 12;
 const FIELD_D = 8;
-const FOG_COLOR = 0x0c0b09;
+const FOG_COLOR = 0x2d3a4a;
 
 const vertexShader = /* glsl */ `
   uniform float uTime;
@@ -69,9 +69,9 @@ const fragmentShader = /* glsl */ `
     if(d > 0.5) discard;
     float alpha = smoothstep(0.5, 0.1, d) * vAlpha;
 
-    /* Gold palette with hover brightening */
-    vec3 baseCol  = vec3(0.78, 0.63, 0.15);
-    vec3 brightCol = vec3(1.0, 0.9, 0.5);
+    /* Pale aqua #AFDEDA palette with hover brightening */
+    vec3 baseCol  = vec3(0.686, 0.871, 0.855);
+    vec3 brightCol = vec3(0.85, 0.95, 0.93);
     vec3 col = mix(baseCol, brightCol, vHover * 0.7);
     alpha = mix(alpha, min(alpha * 2.0, 1.0), vHover * 0.3);
 

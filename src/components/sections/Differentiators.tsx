@@ -9,7 +9,7 @@ import { DIFFERENTIATORS } from "@/lib/constants";
 
 const IMAGES = [
   "/media/cards/business-owners.png",
-  "/media/cards/university-students.png",
+  "/media/cards/university.png",
   "/media/cards/professionals.png",
   "/media/cards/enterprise.png",
 ];
@@ -23,15 +23,16 @@ const CATEGORIES = [
 
 export default function Differentiators() {
   return (
+    <div className="bg-dark">
     <SectionWrapper
       id="differentiators"
-      className="relative bg-white py-20 lg:py-28"
+      className="relative rounded-t-[3rem] bg-white py-20 lg:py-28 sm:rounded-t-[4rem]"
     >
       <div className="mx-auto max-w-[1500px] px-[26px]">
         {/* Header row */}
         <div className="pb-10">
           <h2 className="font-title text-5xl font-semibold leading-[0.95] text-dark sm:text-6xl lg:text-7xl">
-            Courses built for{" "}
+            Built for{" "}
             <em className="italic text-primary">all stages</em>
           </h2>
         </div>
@@ -121,5 +122,6 @@ export default function Differentiators() {
         </div>
       </div>
     </SectionWrapper>
+    </div>
   );
 }

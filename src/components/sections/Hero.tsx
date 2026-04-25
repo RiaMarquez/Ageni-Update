@@ -189,7 +189,7 @@ export default function Hero() {
               <Button
                 href="#pricing"
                 variant="outline"
-                className="border-white/15 text-white/70 hover:border-primary hover:text-primary"
+                className="border-white/15 text-white/70 hover:border-primary hover:text-dark"
               >
                 View Pricing
               </Button>
@@ -254,7 +254,7 @@ export default function Hero() {
                 <ArrowUpRight className="h-4 w-4 shrink-0 text-primary" />
                 {feature.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/40">
+              <p className="mt-3 text-sm leading-relaxed text-white">
                 {feature.description}
               </p>
             </div>

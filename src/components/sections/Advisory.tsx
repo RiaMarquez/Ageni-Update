@@ -87,14 +87,16 @@ function RevealWord({
   const opacity = useTransform(progress, [start, end], [0.12, 1]);
 
   return (
-    <motion.span
-      style={{ opacity }}
-      className={`inline-block ${seg.italic ? "italic" : ""} ${
-        seg.accent ? "text-primary" : "text-white"
-      }`}
-    >
-      {seg.text}
+    <>
+      <motion.span
+        style={{ opacity }}
+        className={`${seg.italic ? "italic" : ""} ${
+          seg.accent ? "text-primary" : "text-white"
+        }`}
+      >
+        {seg.text}
+      </motion.span>
       {" "}
-    </motion.span>
+    </>
   );
 }

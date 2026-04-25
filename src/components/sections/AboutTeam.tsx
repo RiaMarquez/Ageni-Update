@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 
 const TEAM = [
   { name: "Timothy Ngo", role: "CEO & Founder", initials: "TN" },
-  { name: "Alex Rivera", role: "Head of Curriculum", initials: "AR" },
-  { name: "Mia Chen", role: "Lead Engineer", initials: "MC" },
-  { name: "Ria Marquez", role: "Product Lead", initials: "RM" },
-  { name: "James Park", role: "AI Researcher", initials: "JP" },
-  { name: "Sofia Lim", role: "Operations", initials: "SL" },
+  { name: "Chandana Hiram", role: "Head of Content", initials: "CH" },
+  { name: "Maria Marquez", role: "Lead of Development", initials: "MM" },
+  { name: "Sofia Yehia", role: "Media Direction", initials: "SY" },
+  { name: "Ihna Simons", role: "Curriculum Designer", initials: "IS" },
+  { name: "Sue Torio", role: "Partnerships & Growth", initials: "ST" },
 ];
 
 const AGENI_FONTS = [

@@ -16,49 +16,65 @@ interface Book {
   coverImage: string
 }
 
+/* Three on-brand themes — built so every book has strong contrast between
+   spine and cover, and so the header text always reads cleanly on the
+   accent band.
+
+   - DARK   : near-black spine, navy cover, mint header  (most common — rich, premium)
+   - MINT   : navy spine, mint cover, dark header        (highlight)
+   - CREAM  : navy spine, off-white cover, dark header   (highlight) */
+const THEMES = {
+  DARK: {
+    spineColor: "#161E2A",
+    frontColor: "#2D3A4A",
+    accentColor: "#AFDEDA",
+    textColor: "#E5F4E9",
+  },
+  MINT: {
+    spineColor: "#1E293B",
+    frontColor: "#AFDEDA",
+    accentColor: "#1E293B",
+    textColor: "#1E293B",
+  },
+  CREAM: {
+    spineColor: "#1E293B",
+    frontColor: "#E5F4E9",
+    accentColor: "#1E293B",
+    textColor: "#2D3A4A",
+  },
+} as const
+
 const BOOKS: Book[] = [
   {
     spine: "ChatGPT",
     tool: "ChatGPT",
     category: "LLM",
     bestFor: "Your AI Career Assistant — writing, Q&A, ideation, and daily productivity for every role.",
-    spineColor: "#0C0B09",
-    frontColor: "#161412",
-    accentColor: "#C9A227",
-    textColor: "#F5F3EE",
+    ...THEMES.DARK,
     coverImage: "/books/book1.png",
   },
   {
     spine: "Google Veo",
     tool: "Google Veo",
-    category: "Generative Video",
+    category: "Video Gen",
     bestFor: "Advanced AI video generation — turn text prompts into professional video content at scale.",
-    spineColor: "#F5F3EE",
-    frontColor: "#EDE9E0",
-    accentColor: "#0C0B09",
-    textColor: "#161412",
+    ...THEMES.CREAM,
     coverImage: "/books/book2.png",
   },
   {
     spine: "Claude Code",
     tool: "Claude Code",
-    category: "Coding / LLM",
+    category: "Coding LLM",
     bestFor: "AI for developers & technical workflows — code generation, debugging, and automation.",
-    spineColor: "#161412",
-    frontColor: "#1E1C18",
-    accentColor: "#DBBF4A",
-    textColor: "#F5F3EE",
+    ...THEMES.DARK,
     coverImage: "/books/book3.png",
   },
   {
     spine: "Perplexity",
     tool: "Perplexity",
-    category: "Search & Research",
+    category: "Research",
     bestFor: "AI-powered research — real-time answers with cited sources for sales, strategy, and analysis.",
-    spineColor: "#C9A227",
-    frontColor: "#B8931F",
-    accentColor: "#0C0B09",
-    textColor: "#0C0B09",
+    ...THEMES.MINT,
     coverImage: "/books/book4.png",
   },
   {
@@ -66,21 +82,15 @@ const BOOKS: Book[] = [
     tool: "Gemini",
     category: "Image",
     bestFor: "AI image creation — generate visuals, mockups, and marketing assets from text descriptions.",
-    spineColor: "#EDE9E0",
-    frontColor: "#F5F3EE",
-    accentColor: "#8A8472",
-    textColor: "#0C0B09",
+    ...THEMES.CREAM,
     coverImage: "/books/book5.png",
   },
   {
     spine: "Midjourney",
     tool: "Midjourney",
-    category: "Image Advanced",
+    category: "Image Pro",
     bestFor: "Professional design & branding — cinematic imagery and brand visuals at agency quality.",
-    spineColor: "#0C0B09",
-    frontColor: "#111110",
-    accentColor: "#DBBF4A",
-    textColor: "#F5F3EE",
+    ...THEMES.DARK,
     coverImage: "/books/book6.png",
   },
   {
@@ -88,10 +98,7 @@ const BOOKS: Book[] = [
     tool: "Cursor",
     category: "AI IDE",
     bestFor: "AI-powered code editor — build, refactor, and ship software with an AI pair programmer.",
-    spineColor: "#1E1C18",
-    frontColor: "#161412",
-    accentColor: "#C9A227",
-    textColor: "#F5F3EE",
+    ...THEMES.DARK,
     coverImage: "/books/book7.png",
   },
   {
@@ -99,10 +106,7 @@ const BOOKS: Book[] = [
     tool: "MiniMax / Hailuo",
     category: "Applied Video",
     bestFor: "AI video generation for business — product demos, explainers, and social content at speed.",
-    spineColor: "#F5F3EE",
-    frontColor: "#EDE9E0",
-    accentColor: "#161412",
-    textColor: "#0C0B09",
+    ...THEMES.MINT,
     coverImage: "/books/book8.png",
   },
   {
@@ -110,10 +114,7 @@ const BOOKS: Book[] = [
     tool: "Figma",
     category: "Design",
     bestFor: "AI-powered design & prototyping — from wireframe to production UI in a single collaborative tool.",
-    spineColor: "#161412",
-    frontColor: "#1E1C18",
-    accentColor: "#C9A227",
-    textColor: "#F5F3EE",
+    ...THEMES.DARK,
     coverImage: "/books/book9.png",
   },
   {
@@ -121,10 +122,7 @@ const BOOKS: Book[] = [
     tool: "OpenClaw",
     category: "Agentic AI",
     bestFor: "AI agents & automation — build autonomous workflows that act, decide, and execute without you.",
-    spineColor: "#DBBF4A",
-    frontColor: "#C9A227",
-    accentColor: "#0C0B09",
-    textColor: "#0C0B09",
+    ...THEMES.CREAM,
     coverImage: "/books/book10.png",
   },
 ]
@@ -227,10 +225,34 @@ function BookItem({
             alignItems: "center",
             justifyContent: "center",
             gap: 4,
-            borderRight: "1px solid rgba(255,255,255,0.06)",
+            borderRight: "1px solid rgba(255,255,255,0.08)",
             padding: "6px 0",
+            overflow: "hidden",
           }}
         >
+          {/* Soft top-down depth gradient on the spine — light at top, darker at bottom */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 14%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.18) 100%)",
+              pointerEvents: "none",
+            }}
+          />
+          {/* Subtle 1px highlight on the inner edge where spine meets cover */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: 1,
+              height: "100%",
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 100%)",
+              pointerEvents: "none",
+            }}
+          />
           <span
             style={{
               writingMode: "vertical-rl",
@@ -240,6 +262,8 @@ function BookItem({
               color: book.accentColor,
               letterSpacing: "0.1em",
               opacity: 0.9,
+              position: "relative",
+              zIndex: 1,
             }}
           >
             M{index + 1}
@@ -258,6 +282,8 @@ function BookItem({
               maxHeight: "75%",
               padding: "0 4px",
               fontFamily: "Georgia, serif",
+              position: "relative",
+              zIndex: 1,
             }}
           >
             {book.spine}
@@ -286,40 +312,63 @@ function BookItem({
               src={book.coverImage}
               alt={book.tool}
               fill
-              style={{ objectFit: "cover", opacity: 0.15 }}
+              style={{ objectFit: "cover", opacity: 0.12 }}
               onError={() => setImgError(true)}
             />
           )}
+
+          {/* Soft cover lighting — top-left highlight + bottom shadow */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "radial-gradient(120% 80% at 0% 0%, rgba(255,255,255,0.08) 0%, transparent 55%), linear-gradient(180deg, transparent 75%, rgba(0,0,0,0.18) 100%)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+
           <div
             style={{
               position: "relative",
               zIndex: 1,
-              background: book.accentColor,
-              padding: "10px 12px 8px 24px",
+              /* When at rest, the next book's spine sits over the rightmost
+                 portion of this cover. paddingRight: 100 keeps the header
+                 text in the always-visible left zone. When this book is
+                 active, neighbours slide away — full width is usable. */
+              padding: isActive ? "14px 24px 12px 40px" : "14px 100px 12px 40px",
               flexShrink: 0,
+              background: `linear-gradient(180deg, ${adjColor(book.accentColor, 10)} 0%, ${book.accentColor} 100%)`,
+              boxShadow: "0 2px 0 rgba(0,0,0,0.10)",
+              transition: "padding 220ms ease",
             }}
           >
+            {/* Category eyebrow — module number lives on the spine, no need
+                to repeat it here. */}
             <p
               style={{
-                margin: "0 0 2px",
-                fontSize: 9,
+                margin: "0 0 4px",
+                fontSize: 8.5,
                 fontWeight: 700,
-                letterSpacing: "0.12em",
+                letterSpacing: "0.18em",
                 color: book.frontColor,
-                opacity: 0.85,
+                opacity: 0.78,
                 textTransform: "uppercase",
+                lineHeight: 1.3,
               }}
             >
-              Module {index + 1} · {book.category}
+              {book.category}
             </p>
             <p
               style={{
                 margin: 0,
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: 700,
                 color: book.frontColor,
-                lineHeight: 1.2,
+                lineHeight: 1.1,
                 fontFamily: "Georgia, serif",
+                letterSpacing: "-0.005em",
               }}
             >
               {book.tool}
@@ -329,10 +378,11 @@ function BookItem({
             style={{
               position: "relative",
               zIndex: 1,
-              padding: "12px 12px 12px 24px",
+              padding: isActive ? "14px 24px 14px 40px" : "14px 100px 14px 40px",
               flex: 1,
               display: "flex",
               alignItems: "flex-end",
+              transition: "padding 220ms ease",
             }}
           >
             <p
@@ -341,7 +391,7 @@ function BookItem({
                 fontSize: 10,
                 lineHeight: 1.55,
                 color: book.textColor,
-                opacity: 0.75,
+                opacity: 0.78,
               }}
             >
               {book.bestFor}
@@ -466,6 +516,7 @@ export default function BookShelf() {
           pointerEvents: "none",
         }}
       />
+
       <motion.div
         drag="x"
         dragConstraints={containerRef}
@@ -507,7 +558,7 @@ export default function BookShelf() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2 }}
         style={{
-          marginTop: "1.5rem",
+          marginTop: "3rem",
           fontSize: 11,
           letterSpacing: "0.12em",
           textTransform: "uppercase",

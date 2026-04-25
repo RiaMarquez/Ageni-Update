@@ -4,8 +4,8 @@ type Props = { heading: string; content: CaseStudyTestimonialContent };
 
 export default function CaseStudyTestimonial({ heading, content }: Props) {
   return (
-    <section className="bg-white py-16 lg:py-20">
-      <div className="mx-auto grid max-w-[1500px] grid-cols-1 gap-10 px-[26px] md:grid-cols-[1fr_1.5fr]">
+    <section className="bg-white py-20 lg:py-28">
+      <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-12 px-6 md:grid-cols-[1fr_1.5fr] lg:gap-20 lg:px-10">
         <h2 className="font-title text-3xl font-semibold text-dark lg:text-4xl">
           {heading}
         </h2>

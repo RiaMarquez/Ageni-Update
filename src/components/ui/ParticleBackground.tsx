@@ -10,8 +10,8 @@ const SPHERE_SCALE = 1.6;
 const PLANE_W = 18;
 const PLANE_D = 10;
 
-/* Golden / amber palette adapted for ageni */
-const FOG_COLOR = 0x0c0b09;
+/* Light-blue palette on slate — matches Hero bg-dark */
+const FOG_COLOR = 0x2d3a4a;
 
 /* ── GLSL helpers ─────────────────────────────────────────── */
 const vertexShader = /* glsl */ `
@@ -173,18 +173,18 @@ const fragmentShader = /* glsl */ `
     float heightBoost = smoothstep(-2.0, 4.0, vHeight);
     alpha *= mix(0.3, 1.0, heightBoost);
 
-    /* wave color (gold/primary) → sphere gradient */
-    vec3 waveCol    = vec3(0.44, 0.36, 0.11);    // dark gold
-    vec3 sphereCol1 = vec3(0.28, 0.19, 0.01);    // very dark gold
-    vec3 sphereCol2 = vec3(0.50, 0.42, 0.20);    // muted gold
-    vec3 fresnelCol = vec3(0.50, 0.41, 0.10);    // dim amber edge
+    /* Pale aqua #AFDEDA palette */
+    vec3 waveCol    = vec3(0.55, 0.75, 0.72);    // muted aqua
+    vec3 sphereCol1 = vec3(0.34, 0.52, 0.50);    // deep aqua
+    vec3 sphereCol2 = vec3(0.686, 0.871, 0.855); // #AFDEDA
+    vec3 fresnelCol = vec3(0.82, 0.94, 0.92);    // icy aqua edge
 
     vec3 sphereCol = mix(sphereCol2, sphereCol1, vDepth);
     vec3 col = mix(waveCol, sphereCol, smoothstep(0.0, 0.6, uMorph));
     col = mix(col, fresnelCol, vFresnel * 0.7);
 
     /* hover: brighten particles near cursor */
-    col = mix(col, vec3(1.0, 0.92, 0.6), vHover * 0.5);
+    col = mix(col, vec3(0.92, 0.98, 0.96), vHover * 0.5);
     alpha = mix(alpha, 1.0, vHover * 0.4);
 
     gl_FragColor = vec4(col, alpha * 0.96);
@@ -295,8 +295,8 @@ export default function ParticleBackground() {
     /* ── Scroll → morph ────────────────────────────────────── */
     let morphTarget = 0;
     const onScroll = () => {
-      /* morph starts after 100px, completes by 800px */
-      const t = Math.max(0, Math.min(1, (window.scrollY - 100) / 700));
+      /* morph starts after 75px, completes by ~675px */
+      const t = Math.max(0, Math.min(1, (window.scrollY - 75) / 600));
       morphTarget = t;
     };
     window.addEventListener("scroll", onScroll, { passive: true });

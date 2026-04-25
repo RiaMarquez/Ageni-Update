@@ -5,8 +5,8 @@ type Props = { id?: string; items: CaseStudyMediaItem[] };
 
 export default function CaseStudyMediaShowcase({ id, items }: Props) {
   return (
-    <section id={id} className="bg-white py-16 lg:py-20">
-      <div className="mx-auto flex max-w-[1500px] flex-col gap-14 px-[26px]">
+    <section id={id} className="bg-white py-20 lg:py-28">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-16 px-6 lg:gap-20 lg:px-10">
         {items.map((item) => (
           <div
             key={item.title}

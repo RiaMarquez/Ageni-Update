@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence }
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { NAV_LINKS } from "@/lib/constants";
+import IndustriesParticles from "@/components/ui/IndustriesParticles";
 
 /* ── data ── */
 const INDUSTRIES = [
@@ -119,11 +120,14 @@ export default function CTABanner() {
     <div
       id="industries"
       ref={containerRef}
-      className="relative rounded-t-[2rem] bg-[#0a0a0a] lg:rounded-t-[3rem]"
+      className="relative rounded-t-[2rem] bg-[#1E293B] lg:rounded-t-[3rem]"
       style={{ height: `${count * 35}vh` }}
     >
       {/* ── sticky viewport ── */}
       <div className="sticky top-0 flex h-screen w-full overflow-hidden">
+
+        {/* Drifting dot field — sits behind everything inside the sticky viewport */}
+        <IndustriesParticles color="175, 222, 218" />
 
         {/* ═══════════════ LEFT COLUMN ═══════════════ */}
         <div className="relative flex w-full flex-col lg:w-[45%]">

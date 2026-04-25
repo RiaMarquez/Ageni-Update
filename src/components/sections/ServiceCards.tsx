@@ -35,10 +35,10 @@ const CARD_2 = {
   ],
   secondaryLabel: "By audience",
   secondaryTags: [
-    { label: "Enterprise / Corporate", href: "/#industries" },
-    { label: "BPO / Operations", href: "/#industries" },
     { label: "Universities", href: "/#industries" },
-    { label: "Government / NGO", href: "/#industries" },
+    { label: "Owners", href: "/business-owners-more" },
+    { label: "Professionals", href: "/#industries" },
+    { label: "Enterprise / Employees", href: "/#industries" },
   ],
 };
 

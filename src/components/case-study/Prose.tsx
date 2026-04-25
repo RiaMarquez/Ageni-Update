@@ -37,8 +37,8 @@ export default function CaseStudyProse({ content }: Props) {
   );
 
   return (
-    <section className="bg-white py-16 lg:py-20">
-      <div className="mx-auto max-w-[1500px] px-[26px]">
+    <section className="bg-white py-12 lg:py-16">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
         {hasImage ? (
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
             {imageSide === "left" ? (

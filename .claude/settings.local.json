@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/ouimq/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/subagent-driven-development/**)"
+      "Read(//c/Users/ouimq/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/subagent-driven-development/**)",
+      "Bash(grep -rn \"SectionWrapper\" src/components/ui/SectionWrapper.tsx)",
+      "Bash(find src *)",
+      "Read(//c/Users/ouimq/.claude/projects/c--Users-ouimq-Desktop-Ageni-Update/memory/**)",
+      "WebFetch(domain:ramos-app.webflow.io)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(grep -qE \"Ready in|error|Error:|Failed to compile\" \"C:\\\\\\\\Users\\\\\\\\ouimq\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\claude\\\\\\\\c--Users-ouimq-Desktop-Ageni-Update\\\\\\\\c086d65b-a20a-45f1-bd38-10054f5112c3\\\\\\\\tasks\\\\\\\\bf92j677z.output\")",
+      "Bash(cat \"C:\\\\\\\\Users\\\\\\\\ouimq\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\claude\\\\\\\\c--Users-ouimq-Desktop-Ageni-Update\\\\\\\\c086d65b-a20a-45f1-bd38-10054f5112c3\\\\\\\\tasks\\\\\\\\bf92j677z.output\")",
+      "WebFetch(domain:www.worldquantfoundry.com)"
     ]
   }
 }

@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #C9A227;
-  --color-primary-light: #DBBF4A;
-  --color-dark: #0C0B09;
-  --color-accent: #161412;
-  --color-light: #F5F3EE;
-  --color-muted: #8A8472;
+  --color-primary: #AFDEDA;
+  --color-primary-light: #C8E8E4;
+  --color-dark: #2D3A4A;
+  --color-accent: #1E293B;
+  --color-light: #E5F4E9;
+  --color-muted: #7A8694;
   --font-sans: var(--font-body), sans-serif;
   --font-title: var(--font-title), "Bricolage Grotesque", sans-serif;
   --font-subtitle: var(--font-subtitle), "Hind Madurai", sans-serif;
 }
 
 :root {
-  --color-primary: #C9A227;
-  --color-primary-light: #DBBF4A;
-  --color-dark: #0C0B09;
-  --color-accent: #161412;
-  --color-light: #F5F3EE;
-  --color-muted: #8A8472;
+  --color-primary: #AFDEDA;
+  --color-primary-light: #C8E8E4;
+  --color-dark: #2D3A4A;
+  --color-accent: #1E293B;
+  --color-light: #E5F4E9;
+  --color-muted: #7A8694;
 }
 
 html { scroll-behavior: smooth; cursor: none; }
@@ -83,6 +83,18 @@ body { font-family: var(--font-body), "Maven Pro", sans-serif; color: var(--colo
   animation: advisory-orbit 8s linear infinite;
 }
 
+/* Splash roulette reel — loops: hold target → scroll randoms → hold target.
+   Reel is 7 cells; both first and last cells are the target letter, so the
+   loop snap-back is invisible. */
+@keyframes reel-shuffle {
+  0%, 30% { transform: translateY(0); }
+  70%, 100% { transform: translateY(-6em); }
+}
+.animate-reel-shuffle {
+  animation: reel-shuffle 2.4s ease-out infinite;
+  will-change: transform;
+}
+
 /* Ageni shimmer text */
 @keyframes ageni-shimmer {
   0% { background-position: 100% 50%; }
@@ -91,3 +103,13 @@ body { font-family: var(--font-body), "Maven Pro", sans-serif; color: var(--colo
 .ageni-shimmer {
   animation: ageni-shimmer 3s ease-in-out infinite;
 }
+
+/* Hairline scrollbar for case-study breakdown */
+.cs-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(45, 58, 74, 0.35) transparent;
+}
+.cs-scroll::-webkit-scrollbar { width: 2px; }
+.cs-scroll::-webkit-scrollbar-track { background: transparent; margin: 24px 0; }
+.cs-scroll::-webkit-scrollbar-thumb { background: rgba(45, 58, 74, 0.35); border-radius: 0; }
+.cs-scroll::-webkit-scrollbar-thumb:hover { background: rgba(45, 58, 74, 0.65); }

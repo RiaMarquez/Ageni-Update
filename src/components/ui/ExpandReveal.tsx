@@ -27,7 +27,7 @@ export default function ExpandReveal({
   const scale = useTransform(smoothProgress, [0, 1], [0.88, 1]);
 
   return (
-    <div className="bg-[#0a0a0a]">
+    <div className="bg-[#1E293B]">
       <div ref={ref} className="relative" style={{ height: "200vh" }}>
         <div className="sticky top-0 flex h-screen items-end justify-center overflow-hidden">
           <motion.div

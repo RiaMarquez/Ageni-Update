@@ -99,7 +99,7 @@ export default function Navbar() {
       }`}
     >
       {/* ── Main bar ─────────────────────────────────────────── */}
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
         <motion.div variants={itemVariants}>
           <Link href="/" className="shrink-0 block" onMouseEnter={closeServices}>
             <Image src="/media/ageni-logo.png" alt="ageni" width={150} height={50} className="h-[50px] w-auto" />
@@ -131,11 +131,11 @@ export default function Navbar() {
         <motion.div variants={itemVariants} className="flex items-center gap-4" onMouseEnter={closeServices}>
           <Link
             href="#contact"
-            className="hidden items-center gap-2 rounded-full border-2 border-primary bg-light pl-6 pr-1.5 py-1.5 text-sm font-semibold text-primary transition-all hover:bg-primary/5 lg:inline-flex"
+            className="mt-[5px] hidden items-center gap-3 rounded-full border border-dark/30 bg-light pl-10 pr-2.5 py-2.5 text-base font-semibold text-dark transition-all hover:border-dark/60 hover:bg-dark/5 lg:inline-flex"
           >
             Get Started
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-              <ArrowUpRight className="h-4 w-4 text-primary" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-dark">
+              <ArrowUpRight className="h-5 w-5 text-white" />
             </span>
           </Link>
 
@@ -246,7 +246,7 @@ export default function Navbar() {
                 )}
               </ul>
               <div className="mt-auto pt-6">
-                <Link href="#contact" className="flex items-center justify-center gap-2 rounded-full border-2 border-primary bg-transparent px-5 py-3 text-sm font-semibold text-primary" onClick={() => setMobileOpen(false)}>
+                <Link href="#contact" className="flex items-center justify-center gap-2 rounded-full border border-dark bg-light px-6 py-3.5 text-sm font-semibold text-dark" onClick={() => setMobileOpen(false)}>
                   Get Started <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>

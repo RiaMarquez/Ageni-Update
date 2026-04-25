@@ -8,7 +8,7 @@ type Props = { content: CaseStudyFinalCTAContent };
 export default function CaseStudyFinalCTA({ content }: Props) {
   return (
     <section className="bg-accent py-20 lg:py-28">
-      <div className="mx-auto max-w-[1500px] px-[26px]">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           <div>
             <h2 className="font-title text-4xl font-semibold leading-[1.05] text-white lg:text-5xl">

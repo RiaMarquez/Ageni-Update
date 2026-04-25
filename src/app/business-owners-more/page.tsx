@@ -7,7 +7,6 @@ import {
   CaseStudyMediaShowcase,
   CaseStudyResults,
   CaseStudyTestimonial,
-  CaseStudyFinalCTA,
 } from "@/components/case-study";
 
 export const metadata: Metadata = {
@@ -63,32 +62,47 @@ const content = {
     image: { alt: "Approach illustration", caption: "Our approach" },
   },
   whatYouGet: {
-    heading: "What you get",
+    heading: "What we did",
     items: [
       {
         label: "AI literacy foundations",
         previewCaption: "AI literacy foundations preview",
+        previewSrc: "/media/business-owners-more/tab-ai-literacy.png",
+        description:
+          "We start owners with the vocabulary, capabilities, and limits of modern AI — what it can actually do for a small business today, and where the hype falls apart. No engineering background required, no jargon left undefined.",
       },
       {
         label: "Prompt design for business problems",
         previewCaption: "Prompt design preview",
+        previewSrc: "/media/business-owners-more/tab-prompt-design.png",
+        description:
+          "Hands-on practice writing prompts that return usable answers the first time. Owners work through real business scenarios — sales emails, supplier negotiations, customer service drafts — and learn the patterns that consistently produce good output.",
       },
       {
         label: "Output evaluation & quality checks",
         previewCaption: "Output evaluation preview",
+        previewSrc: "/media/business-owners-more/tab-output-evaluation.png",
+        description:
+          "AI is confident even when it's wrong. We teach owners how to judge AI output against their own quality bar, spot hallucinations and fabrications, and decide when output is ready to ship versus when it needs another pass.",
       },
       {
         label: "AI risk identification",
         previewCaption: "AI risk identification preview",
+        previewSrc: "/media/business-owners-more/tab-risk-identification.png",
+        description:
+          "Where AI is safe to use and where it isn't — privacy, accuracy, legal exposure, brand voice. Owners leave with a working framework for setting guardrails on their team's AI usage without slowing the business down.",
       },
       {
         label: "Applying AI to your operations",
         previewCaption: "Operations application preview",
+        previewSrc: "/media/business-owners-more/tab-application.png",
+        description:
+          "By the final module, owners map AI to their own SOPs across sales, ops, customer service, finance, and management. Every owner finishes the course with a named operation they've already accelerated using AI — not a theoretical plan.",
       },
     ],
   },
   breakdown: {
-    heading: "Course breakdown",
+    heading: "Project breakdown",
     intro:
       "Access tiers (AI Literacy / Business Growth / Advanced) unlock increasing depth within these modules.",
     items: [
@@ -159,45 +173,41 @@ const content = {
       authorCompany: "[Company]",
     },
   },
-  finalCta: {
-    heading: "Let's talk about your team",
-    secondaryCtaLabel: "Book a call",
-    secondaryCtaHref: "/contact",
-    disclaimerHtml:
-      'By submitting this form you agree to our <a href="/privacy-policy" class="underline">Privacy Policy</a>. This site is protected by reCAPTCHA.',
-  },
 };
 
 export default function BusinessOwnersMorePage() {
   return (
     <main>
       <CaseStudyHero content={content.hero} />
-      <CaseStudyProse content={content.whoItsFor} />
-      <CaseStudyProse content={content.goal} />
-      <CaseStudyProse content={content.challenges} />
-      <CaseStudyProse content={content.approach} />
-      <CaseStudyTabs
-        heading={content.whatYouGet.heading}
-        items={content.whatYouGet.items}
-      />
-      <CaseStudyBreakdown
-        heading={content.breakdown.heading}
-        intro={content.breakdown.intro}
-        items={content.breakdown.items}
-      />
-      <CaseStudyMediaShowcase
-        id="sample-materials"
-        items={content.sampleMaterials}
-      />
-      <CaseStudyResults
-        heading={content.outcomes.heading}
-        items={content.outcomes.items}
-      />
-      <CaseStudyTestimonial
-        heading={content.testimonial.heading}
-        content={content.testimonial.content}
-      />
-      <CaseStudyFinalCTA content={content.finalCta} />
+      <div className="bg-accent">
+        <div className="overflow-hidden rounded-t-[3rem] sm:rounded-t-[4rem]">
+          <CaseStudyProse content={content.whoItsFor} />
+          <CaseStudyProse content={content.goal} />
+          <CaseStudyProse content={content.challenges} />
+          <CaseStudyProse content={content.approach} />
+          <CaseStudyTabs
+            heading={content.whatYouGet.heading}
+            items={content.whatYouGet.items}
+          />
+          <CaseStudyBreakdown
+            heading={content.breakdown.heading}
+            intro={content.breakdown.intro}
+            items={content.breakdown.items}
+          />
+          <CaseStudyMediaShowcase
+            id="sample-materials"
+            items={content.sampleMaterials}
+          />
+          <CaseStudyResults
+            heading={content.outcomes.heading}
+            items={content.outcomes.items}
+          />
+          <CaseStudyTestimonial
+            heading={content.testimonial.heading}
+            content={content.testimonial.content}
+          />
+        </div>
+      </div>
     </main>
   );
 }

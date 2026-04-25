@@ -8,7 +8,7 @@ type Props = { content: CaseStudyHeroContent };
 export default function CaseStudyHero({ content }: Props) {
   return (
     <section className="relative overflow-hidden bg-accent pt-28 pb-20 lg:pt-36 lg:pb-28">
-      <div className="mx-auto max-w-[1500px] px-[26px]">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
         <CaseStudyBreadcrumb items={content.breadcrumbs} className="mb-12" />
 
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">

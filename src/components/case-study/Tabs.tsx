@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import Image from "next/image";
 import type { CaseStudyTabItem } from "./types";
 
@@ -8,7 +8,10 @@ type Props = { heading: string; items: CaseStudyTabItem[] };
 
 export default function CaseStudyTabs({ heading, items }: Props) {
   const [active, setActive] = useState(0);
+  const panelId = useId();
   const current = items[active];
+
+  if (!current) return null;
 
   return (
     <section className="bg-white py-16 lg:py-20">
@@ -18,13 +21,20 @@ export default function CaseStudyTabs({ heading, items }: Props) {
         </h2>
 
         <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2">
-          <ul className="flex flex-col divide-y divide-dark/10 rounded-xl border border-dark/10">
+          <ul
+            role="tablist"
+            aria-label={heading}
+            className="flex flex-col divide-y divide-dark/10 rounded-xl border border-dark/10"
+          >
             {items.map((item, i) => {
               const isActive = i === active;
               return (
-                <li key={item.label}>
+                <li key={item.label} role="presentation">
                   <button
                     type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={panelId}
                     onClick={() => setActive(i)}
                     className={`flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-medium transition-colors ${
                       isActive
@@ -40,7 +50,12 @@ export default function CaseStudyTabs({ heading, items }: Props) {
             })}
           </ul>
 
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-dark/[0.04]">
+          <div
+            id={panelId}
+            role="tabpanel"
+            aria-label={current.label}
+            className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-dark/[0.04]"
+          >
             {current.previewSrc ? (
               <Image
                 src={current.previewSrc}

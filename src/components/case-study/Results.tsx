@@ -12,8 +12,8 @@ export default function CaseStudyResults({ heading, items }: Props) {
         </h2>
 
         <ul className="flex flex-col gap-5">
-          {items.map((item) => (
-            <li key={item} className="flex items-start gap-3">
+          {items.map((item, i) => (
+            <li key={i} className="flex items-start gap-3">
               <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-primary" />
               <span className="text-base leading-relaxed text-dark/80">
                 {item}

@@ -11,7 +11,7 @@ export default function CaseStudyBreadcrumb({ items, className = "" }: Props) {
       className={`flex items-center gap-2 text-sm text-white/70 ${className}`}
     >
       {items.map((item, i) => (
-        <span key={item.label} className="flex items-center gap-2">
+        <span key={i} className="flex items-center gap-2">
           {item.href ? (
             <Link href={item.href} className="hover:text-white">
               {item.label}

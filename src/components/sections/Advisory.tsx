@@ -40,7 +40,7 @@ export default function Advisory() {
     <div className="bg-dark">
       <div ref={ref} className="relative" style={{ height: "260vh" }}>
         <div className="noise-bg sticky top-0 flex h-screen items-center overflow-hidden">
-          <AdvisoryParticles />
+          <AdvisoryParticles progress={scrollYProgress} />
           <div className="pointer-events-none absolute top-0 left-1/2 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
           <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-center">

@@ -4,19 +4,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRadialFill, radialFillStyle } from "@/components/ui/useRadialFill";
 
 const CARD_1 = {
   title: "AI Literacy\nTraining",
   initials: "AL",
   description:
     "We close the gap between AI adoption and real-world AI skill. Our structured programs blend instructional design, mastery-verified assessments, and AI avatar tutors to take individuals and teams from AI-curious to AI-competent.",
-  categoryLabel: "Training services",
+  categoryLabel: "Module features",
   tags: [
-    { label: "Prompt Mastery Assessment", href: "/#pricing" },
-    { label: "AI Foundations Course", href: "/#how-it-works" },
-    { label: "AI for Business Leaders", href: "/#pricing" },
-    { label: "Self-Paced Learning Modules", href: "/#how-it-works" },
-    { label: "AI Avatar Tutoring", href: "/#differentiators" },
+    { label: "Immersive Video Lessons", href: "/#how-it-works" },
+    { label: "24/7 AI Avatar Tutor", href: "/#differentiators" },
+    { label: "Voice-Based Assessments", href: "/#differentiators" },
+    { label: "Live AI Tool Practice", href: "/#how-it-works" },
+    { label: "Progressive Mastery Assessment", href: "/#differentiators" },
+    { label: "Spaced Repetition Reviews", href: "/#differentiators" },
   ],
 };
 
@@ -30,7 +32,6 @@ const CARD_2 = {
     { label: "Role-Based Assessments", href: "/#industries" },
     { label: "Team Upskilling Programs", href: "/#pricing" },
     { label: "Enterprise Packages", href: "/#pricing" },
-    { label: "SOP-Tailored Curricula", href: "/#faq" },
     { label: "Employer Mastery Dashboard", href: "/#differentiators" },
   ],
   secondaryLabel: "By audience",
@@ -43,6 +44,7 @@ const CARD_2 = {
 };
 
 function TagPill({ label, href, index }: { label: string; href: string; index: number }) {
+  const fill = useRadialFill();
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -52,11 +54,17 @@ function TagPill({ label, href, index }: { label: string; href: string; index: n
     >
       <Link
         href={href}
-        className="group/pill relative flex items-center justify-between gap-4 overflow-hidden rounded-full bg-light px-5 py-3.5 text-sm font-medium text-dark/80 transition-all duration-300 hover:bg-primary/10 hover:text-dark"
+        onMouseEnter={fill.onMouseEnter}
+        onMouseLeave={fill.onMouseLeave}
+        className="group/pill relative flex items-center justify-between gap-4 overflow-hidden rounded-full bg-light px-5 py-3.5 text-sm font-medium text-dark/80 transition-colors duration-300 hover:text-dark"
       >
-        <span className="absolute inset-0 -translate-x-full bg-primary/[0.06] transition-transform duration-500 ease-out group-hover/pill:translate-x-0" />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/30 motion-reduce:hidden"
+          style={radialFillStyle}
+        />
         <span className="relative z-10">{label}</span>
-        <ArrowUpRight className="relative z-10 h-4 w-4 shrink-0 text-dark/30 transition-all duration-300 group-hover/pill:-translate-y-0.5 group-hover/pill:translate-x-0.5 group-hover/pill:text-primary" />
+        <ArrowUpRight className="relative z-10 h-4 w-4 shrink-0 text-dark/30 transition-all duration-300 group-hover/pill:-translate-y-0.5 group-hover/pill:translate-x-0.5 group-hover/pill:text-dark" />
       </Link>
     </motion.div>
   );

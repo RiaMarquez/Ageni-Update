@@ -3,15 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { DIFFERENTIATORS } from "@/lib/constants";
 
-const IMAGES = [
+const IMAGES: (string | null)[] = [
   "/media/cards/business-owners.png",
   "/media/cards/university.png",
-  "/media/cards/professionals.png",
-  "/media/cards/enterprise.png",
+  null,
+  null,
 ];
 
 const CATEGORIES = [
@@ -64,13 +63,21 @@ export default function Differentiators() {
                   {/* Thumbnail */}
                   <div className="col-span-12 md:col-span-5">
                     <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-dark/[0.04] md:w-[70%]">
-                      <Image
-                        src={IMAGES[i]}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(min-width: 768px) 30vw, 100vw"
-                      />
+                      {IMAGES[i] ? (
+                        <Image
+                          src={IMAGES[i]!}
+                          alt={item.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          sizes="(min-width: 768px) 30vw, 100vw"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center bg-dark/[0.04]">
+                          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-dark/40">
+                            Coming soon
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -110,16 +117,6 @@ export default function Differentiators() {
           })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-10 flex justify-center">
-          <Link
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-dark/15 bg-white px-6 py-3 text-sm font-medium text-dark transition-all hover:border-dark hover:bg-dark hover:text-white"
-          >
-            Learn more about our platform
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
       </div>
     </SectionWrapper>
     </div>

@@ -7,6 +7,7 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, SERVICE_MENU } from "@/lib/constants";
 import { useSplash } from "@/components/ui/SplashContext";
+import { useRadialFill, radialFillStyle } from "@/components/ui/useRadialFill";
 
 export default function Navbar() {
   const { splashDone } = useSplash();
@@ -15,6 +16,7 @@ export default function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [videoExpanded, setVideoExpanded] = useState(false);
+  const ctaFill = useRadialFill();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -120,6 +122,10 @@ export default function Navbar() {
                   </svg>
                 </button>
               </li>
+            ) : ("disabled" in link && link.disabled) ? (
+              <li key={link.label} onMouseEnter={closeServices}>
+                <span className="text-sm font-medium text-dark/70 transition-colors hover:text-dark" aria-disabled="true">{link.label}</span>
+              </li>
             ) : (
               <li key={link.label} onMouseEnter={closeServices}>
                 <Link href={link.href} className="text-sm font-medium text-dark/70 transition-colors hover:text-dark">{link.label}</Link>
@@ -131,11 +137,18 @@ export default function Navbar() {
         <motion.div variants={itemVariants} className="flex items-center gap-4" onMouseEnter={closeServices}>
           <Link
             href="#contact"
-            className="mt-[5px] hidden items-center gap-3 rounded-full border border-dark/30 bg-light pl-10 pr-2.5 py-2.5 text-base font-semibold text-dark transition-all hover:border-dark/60 hover:bg-dark/5 lg:inline-flex"
+            onMouseEnter={ctaFill.onMouseEnter}
+            onMouseLeave={ctaFill.onMouseLeave}
+            className="group mt-[5px] relative hidden items-center gap-3 overflow-hidden rounded-full border border-dark/30 bg-light pl-10 pr-2.5 py-2.5 text-base font-semibold text-dark transition-colors hover:border-dark/60 lg:inline-flex"
           >
-            Get Started
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-dark">
-              <ArrowUpRight className="h-5 w-5 text-white" />
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary motion-reduce:hidden"
+              style={radialFillStyle}
+            />
+            <span className="relative z-10">Get Started</span>
+            <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full bg-dark transition-colors duration-300 delay-200 group-hover:bg-light">
+              <ArrowUpRight className="h-5 w-5 text-white transition-colors duration-300 delay-200 group-hover:text-dark" />
             </span>
           </Link>
 
@@ -240,6 +253,8 @@ export default function Navbar() {
                         </div>
                       ))}
                     </li>
+                  ) : ("disabled" in link && link.disabled) ? (
+                    <li key={link.label}><span className="text-base font-medium text-white/70" aria-disabled="true">{link.label}</span></li>
                   ) : (
                     <li key={link.label}><Link href={link.href} className="text-base font-medium text-white/70 hover:text-primary" onClick={() => setMobileOpen(false)}>{link.label}</Link></li>
                   )

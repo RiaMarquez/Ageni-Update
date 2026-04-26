@@ -4,8 +4,8 @@
 
 export const NAV_LINKS = [
   { label: "Services", href: "#", hasDropdown: true },
-  { label: "Partnerships", href: "/partnerships" },
-  { label: "About", href: "/about" },
+  { label: "Partnerships", href: "/partnerships", disabled: true },
+  { label: "About", href: "/about", disabled: true },
   { label: "Blog", href: "/blog" },
   { label: "FAQs", href: "/#faq" },
 ] as const;
@@ -119,30 +119,54 @@ export const DIFFERENTIATORS = [
 
 export const FAQ_ITEMS = [
   {
-    question: "What is the Prompt Mastery Assessment (PMA)?",
+    question: "What is ageni.ai?",
     answer:
-      "The PMA is a rigorous, AI-proctored exam that evaluates your ability to write effective prompts, reason about AI outputs, and apply AI tools to real-world tasks. It goes beyond multiple choice — you demonstrate mastery through practical, scenario-based challenges.",
+      "ageni.ai is Iozera's AI learning platform. It delivers two products on a single engine: AI Literacy — structured courses that train business owners and employees to use AI effectively in daily work — and Custom Job Skills Training — job-specific programs built from a company's own SOPs and workflows. Both are powered by AI avatar tutors and the Progressive Mastery Assessment (PMA) system.",
+  },
+  {
+    question: "How is mastery verified?",
+    answer:
+      "Through the Progressive Mastery Assessment (PMA). For every concept, the engine starts with 3 dynamically generated questions and expands — to 6, 9, up to 200 — until understanding is demonstrated. The learner then enters Performance Validation: a real scenario where they evaluate an AI output, solve a novel problem, or defend a decision. Only two states exist: mastered, or not yet mastered. No percentage scores, no rankings, no advancement past an unresolved gap.",
   },
   {
     question: "Which AI tools does the curriculum cover?",
     answer:
-      "Our curriculum covers leading AI platforms including ChatGPT, Claude, Gemini, Midjourney, and industry-specific tools. We update content regularly so you are always learning with the latest models and best practices.",
+      "The AI Literacy curriculum is built around 10 core AI tools defined in collaboration with Iozera leadership and is updated as tools and best practices change. Coverage includes how LLMs work at a practical level, prompt design, critical evaluation of AI outputs, applying AI to sales / operations / customer service / finance, and responsible-use considerations. All hands-on work happens on live AI platforms — not simulations.",
   },
   {
-    question:
-      "How does ageni.ai compare to LinkedIn Learning or Coursera for AI training?",
+    question: "How much does it cost?",
     answer:
-      "Unlike LinkedIn Learning or Coursera, ageni.ai focuses exclusively on verifiable AI mastery. Our PMA certification proves you can actually use AI — not just watch videos about it. Employers trust our credentials because of our anti-gaming assessment technology.",
+      "AI Literacy has three tiers per learner: $100 (AI Literacy), $500 (AI Literacy + Business Growth), and $1,000 (Advanced). Philippines market pricing is $50 per learner for the base tier. Custom Job Skills Training is priced per engagement based on number of roles, concepts, and employee volume. There are no subscriptions, hidden fees, or per-seat software licenses.",
   },
   {
-    question: "How do employers verify a candidate's certification?",
+    question: "Who is ageni.ai built for?",
     answer:
-      "Each certification comes with a unique verification link and QR code. Employers can also use the Mastery Dashboard for real-time analytics on candidate and employee AI skill levels, including role-specific breakdowns.",
+      "Business owners and HR leaders enrolling employees are the primary audience. Enterprises with high-volume onboarding needs are the audience for Custom Job Skills Training — companies that need to train service technicians, operations staff, or customer-facing employees consistently across locations. University students are a secondary market, accessed through institution-issued coupon codes.",
   },
   {
-    question: "What are Custom Job Skills assessments?",
+    question: "What is Custom Job Skills Training?",
     answer:
-      "Custom Job Skills lets organizations create role-specific AI assessments tailored to their workflows. Whether you need to evaluate prompt engineering for marketers, data analysts, or customer support teams, we build assessments that match your exact requirements.",
+      "Job-specific training programs built from the client's own materials — SOPs, workflows, role definitions, and training standards. Iozera maps the roles, the curriculum is built from the company's own content (not generic), and the AI delivers it consistently to every employee in every location. PMA verification runs throughout, and the employer receives a verified mastery record per employee per role.",
+  },
+  {
+    question: "How does the platform prevent assessment gaming or AI-assisted cheating?",
+    answer:
+      "Every question is dynamically generated and rephrased — no two learners receive the same assessment, so sharing answers has no value. Performance Validation is a live, interactive Socratic dialogue with real-time follow-up questions based on the learner's specific responses. Answers sourced from an external AI do not survive targeted follow-up questioning that probes for depth and original application. Mastery is also re-tested at 30, 60, and 90 days through spaced repetition.",
+  },
+  {
+    question: "What do employers actually see in the dashboard?",
+    answer:
+      "The employer dashboard shows individual mastery data — which specific concepts each employee has mastered, which they have not yet mastered, and which certifications they have earned. It is intentionally not aggregated into completion percentages or course progress bars; the data is specific enough to act on. Detailed assessment interactions remain accessible to the learner, not exposed to the employer by default.",
+  },
+  {
+    question: "How does ageni.ai compare to LinkedIn Learning, Coursera, or Udemy?",
+    answer:
+      "Most platforms have AI content; few verify that the learner can actually apply what they learned. ageni.ai is built around mastery-verified certification: anti-gaming dynamic assessment, performance validation as a required final stage, an individual-level employer mastery dashboard, and Custom Job Skills Training on the same platform. A learner is certified only after completing the full PMA sequence and passing performance validation — finishing a course is not enough.",
+  },
+  {
+    question: "How is learner data handled?",
+    answer:
+      "ageni.ai collects only what is necessary for training and certification: course progress, assessment responses, and mastery records. Learner data is not sold or shared with third parties. The platform is designed for compliance with GDPR, the Philippine Data Privacy Act (RA 10173), and applicable national data protection laws per market. University students enrolled through institutional codes receive additional protections — no behavioral advertising, no sale of student data.",
   },
 ] as const;
 

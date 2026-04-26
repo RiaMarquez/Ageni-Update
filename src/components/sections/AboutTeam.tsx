@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useRadialFill, radialFillStyle } from "@/components/ui/useRadialFill";
 
 const TEAM = [
   { name: "Timothy Ngo", role: "CEO & Founder", initials: "TN" },
@@ -137,6 +138,7 @@ function TeamCarousel() {
 }
 
 export default function AboutTeam() {
+  const moreFill = useRadialFill();
   return (
     <section className="bg-light pt-12 pb-12 lg:pt-20 lg:pb-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -210,12 +212,18 @@ export default function AboutTeam() {
             className="shrink-0"
           >
             <Link
-              href="/about"
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-dark/20 px-7 py-3.5 text-sm font-medium text-dark transition-all duration-300 hover:border-primary hover:text-primary"
+              href="/"
+              onMouseEnter={moreFill.onMouseEnter}
+              onMouseLeave={moreFill.onMouseLeave}
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-dark/20 px-7 py-3.5 text-sm font-medium text-dark transition-colors duration-300 hover:border-primary"
             >
-              <span className="absolute inset-0 -translate-x-full bg-primary/[0.06] transition-transform duration-500 ease-out group-hover:translate-x-0" />
-              <span className="relative">More about us</span>
-              <ArrowUpRight className="relative h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/40 motion-reduce:hidden"
+                style={radialFillStyle}
+              />
+              <span className="relative z-10">More about us</span>
+              <ArrowUpRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </motion.div>
         </div>

@@ -43,21 +43,21 @@ const content = {
   goal: {
     heading: "The goal",
     body:
-      "Graduate with the judgment to direct AI work, evaluate output quality, and apply AI across sales, ops, customer service, finance, and management — at a price point a small business can justify.",
+      "By the end, an owner can look at AI output and know whether it's any good — what to keep, what to throw out, and what to send back. They can prompt for the answers they actually need, point their team at the right tools for the right tasks, and apply AI where it moves the needle: sales, ops, customer service, finance, and the day-to-day calls that keep the company running. Priced for a small business, not an enterprise procurement budget.",
     imageSide: "left" as const,
     image: { alt: "Course goal illustration", caption: "Course goal" },
   },
   challenges: {
     heading: "The challenges",
     body:
-      "Most AI training assumes a technical audience. Owners face a different problem: no time for courses built for engineers; no reliable way to tell good AI output from confident-sounding wrong answers; no clarity on where AI is safe to use versus risky; and tools that change faster than training materials. Courses need to meet owners where they are.",
+      "Most AI courses are written for engineers. That doesn't help the owner running a business. Owners aren't training models, they're trying to close deals, write next quarter's plan, and keep customer service from drowning. The way most courses grade is part of the problem too. An owner scores 70%, gets passed, and the 30% they missed quietly carries forward to the next module. Six months later it shows up as a bad decision they didn't see coming. The tools keep moving on top of all that. The way ChatGPT was prompted in January isn't how it should be prompted today, and the owner down the street probably already knows that. None of it even touches the trust gap — knowing when AI is right, when it's confidently wrong, and when it shouldn't be used at all. That's the gap this course is built to close.",
     imageSide: "right" as const,
     image: { alt: "Challenges illustration", caption: "Owner challenges" },
   },
   approach: {
     heading: "Our approach",
     body:
-      "No-code, operations-first, tiered access so owners pay for the depth they need, and hands-on prompt and evaluation practice over theory. Every module ties back to a decision an owner actually makes.",
+      "The course is built like an owner's day — short, hands-on, and rooted in real decisions. No engineering background needed and no theory for theory's sake. Every module asks the owner to do something with AI, then pushes them on it: write the prompt, evaluate the output, decide whether to ship it. Mastery is the bar — owners only move on once a concept is genuinely understood, not when they've scraped together enough partial credit. And the tiered access (AI Literacy, Business Growth, Advanced) lets an owner pay for the depth the business actually needs, not a one-size course wrapped in marketing.",
     imageSide: "right" as const,
     image: { alt: "Approach illustration", caption: "Our approach" },
   },
@@ -102,34 +102,59 @@ const content = {
     ],
   },
   breakdown: {
-    heading: "Project breakdown",
+    heading: "Course breakdown",
     intro:
-      "Access tiers (AI Literacy / Business Growth / Advanced) unlock increasing depth within these modules.",
+      "Ten tools, ten modules. Each one mapped to how a business owner actually uses AI day-to-day — across content, ops, sales, research, and decisions you make every week.",
     items: [
       {
-        title: "Foundation",
+        title: "ChatGPT — LLM",
         description:
-          "Terminology, capabilities, and limits. What AI is and isn't good for today.",
+          "Your daily assistant. Draft emails, summarise meetings, brainstorm strategy, and get up to speed on any topic in minutes — without a research team.",
       },
       {
-        title: "Prompt Mastery",
+        title: "Google Veo — Video Gen",
         description:
-          "Frameworks for writing prompts that return useful output on the first try.",
+          "Turn a prompt into polished video. Generate ads, social reels, and explainers without booking a studio or hiring an editor.",
       },
       {
-        title: "Output Evaluation",
+        title: "Claude Code — Coding LLM",
         description:
-          "Judge AI work against your own quality bar. Spot hallucination, drift, and bluffing.",
+          "Automate the tedious. Pull data from spreadsheets, write internal scripts, and ship small tools your team uses every day — even if you don't code.",
       },
       {
-        title: "Risk & Ethics",
+        title: "Perplexity — Research",
         description:
-          "Where AI is safe and where it isn't. How to set guardrails for your team.",
+          "Real-time research with cited sources. Market scans, competitor checks, and due diligence in the time it used to take to open the browser.",
       },
       {
-        title: "Application",
+        title: "Gemini — Image",
         description:
-          "Map AI to your own SOPs across sales, ops, customer service, finance, and management.",
+          "Generate marketing visuals, product mockups, and social-ready imagery from a description. Skip the freelance brief.",
+      },
+      {
+        title: "Midjourney — Image Pro",
+        description:
+          "Agency-grade creative for brand campaigns, pitch decks, and hero imagery. The look you'd outsource — produced inside your business.",
+      },
+      {
+        title: "Cursor — AI IDE",
+        description:
+          "An AI pair programmer. Prototype features, fix bugs, and ship internal tools alongside your devs — or before you hire one.",
+      },
+      {
+        title: "MiniMax / Hailuo — Applied Video",
+        description:
+          "AI video built for business — product demos, customer training, and explainer content delivered at the speed you actually need it.",
+      },
+      {
+        title: "Figma AI — Design",
+        description:
+          "From wireframe to production UI in one tool. Move fast on landing pages, decks, and brand assets without bouncing between three apps.",
+      },
+      {
+        title: "OpenClaw — Agentic AI",
+        description:
+          "AI agents that act on your behalf. Automate outreach, lead qualification, scheduling, and reporting — workflows that used to need another hire.",
       },
     ],
   },

@@ -196,34 +196,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — Stacked video collage */}
+          {/* Right — Hero video */}
           <div className="relative aspect-[4/3] sm:aspect-video">
-            {/* Bottom layer — video2 (orange), -12deg, shifted down-left */}
-            <div
-              className="absolute inset-0 z-0 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
-              style={{ transform: `rotate(3deg) translate(${isMobile ? 2 : -18}px, ${isMobile ? -40 : 20}px)` }}
-            >
-              <video
-                autoPlay loop muted playsInline disablePictureInPicture
-                className="h-full w-full object-cover grayscale"
-                src="/media/video2.mp4"
-              />
-              <div className="absolute inset-0 bg-black/50" />
-            </div>
-
-            {/* Middle layer — video1 (red), -4deg, shifted up-right */}
-            <div
-              className="absolute inset-0 z-10 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
-              style={{ transform: `rotate(5deg) translate(${isMobile ? 10 : 30}px, ${isMobile ? 14 : -76}px)` }}
-            >
-              <video
-                autoPlay loop muted playsInline disablePictureInPicture
-                className="h-full w-full object-cover grayscale"
-                src="/media/video1.mp4"
-              />
-              <div className="absolute inset-0 bg-black/50" />
-            </div>
-
             {/* Top layer — hero-video (yellow), 12deg, centered */}
             <div
               data-cursor-text="Watch"
